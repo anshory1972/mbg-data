@@ -84,7 +84,10 @@ dl.gl dd{margin:2px 0 0;color:var(--ink);max-width:760px}
 footer{margin-top:40px;border-top:1px solid var(--rule);padding-top:14px;color:var(--muted);font-size:13px}
 a{color:var(--slate)}
 .hidden{display:none !important}
-@media (max-width:480px){h1{font-size:23px}th,td{padding:7px 8px}table{font-size:13px}}
+.swipe{font-size:12px;color:var(--slate);margin:0 0 6px}
+@media (max-width:480px){h1{font-size:23px}table{font-size:12px}th,td{padding:6px 5px}
+ th.rh,td:first-child{min-width:78px;max-width:104px;font-size:12px}
+ td.c{min-width:60px}thead th{min-width:56px;font-size:11px}}
 </style>
 </head>
 <body>
@@ -126,7 +129,8 @@ a{color:var(--slate)}
   <p class="sub" id="tblsub"></p>
   <p class="cmp hidden" id="cmpnote" data-i="cmp"></p>
   <p class="cmp hidden" id="valnote" data-i="valnote"></p>
-  <div class="tw"><table id="tbl"></table></div>
+  <p class="swipe hidden" id="swipe" data-i="swipe"></p>
+  <div class="tw" id="tw"><table id="tbl"></table></div>
   <p class="legend" data-i="legend"></p>
   <div class="detail hidden" id="detail" aria-live="polite"></div>
   <div class="src" id="src"></div>
@@ -176,6 +180,7 @@ var T = {
  c_topic: {id: "Topik", en: "Topic"}, c_pop: {id: "Kelompok", en: "Group"},
  c_measure: {id: "Ukuran", en: "Measure"}, c_by: {id: "Rincian menurut", en: "Breakdown"},
  na: {id: "tidak ada", en: "none"},
+ swipe: {id: "Geser tabel ke kanan untuk melihat kolom lainnya →", en: "Swipe the table to the right to see more columns →"},
  c_show: {id: "Tampilkan", en: "Show"}, c_area: {id: "Wilayah", en: "Area"}, c_out: {id: "Jawaban", en: "Answer"},
  show_est: {id: "Persen / nilai", en: "Percent / value"},
  show_w: {id: "Jumlah tertimbang", en: "Weighted number"},
@@ -522,6 +527,8 @@ function render() {
     h += "</tr>";
   });
   tbl.innerHTML = h + "</tbody>";
+  var tw = $("tw");
+  $("swipe").classList.toggle("hidden", !(tw.scrollWidth > tw.clientWidth + 2));
 
   var r0 = rows[0] || {};
   var stat = r0.statistic || "percent";
@@ -619,6 +626,7 @@ tbl.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key ==
 document.querySelectorAll(".lang button").forEach(function (b) {
   b.addEventListener("click", function () { S.lang = b.getAttribute("data-lang"); try { localStorage.setItem("mbgLang", S.lang); } catch (x) {} renderStatic(); if (R.length) render(); });
 });
+window.addEventListener("resize", function () { var tw = $("tw"); if (tw) $("swipe").classList.toggle("hidden", !(tw.scrollWidth > tw.clientWidth + 2)); });
 try { var saved = localStorage.getItem("mbgLang"); if (saved === "en" || saved === "id") S.lang = saved; } catch (x) {}
 
 renderStatic();

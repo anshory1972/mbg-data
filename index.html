@@ -8,9 +8,9 @@
 <link rel="icon" type="image/png" href="files/den_logo_96.png">
 <meta name="description" content="Tabel dari pertanyaan Makan Bergizi Gratis (MBG) dalam Susenas September 2025, BPS. Versi beta.">
 <style>
-:root{--paper:#f4f2ed;--surface:#fffdf9;--ink:#14161c;--rule:#dcd8ce;--muted:#6d6a63;--accent:#b4451f;--slate:#1c4e73;--bar:#ecdcd1;--warn:#8a5a00;--warnbg:#fbf0d9;--sel:#e6eef5}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#0f1013;--surface:#17191e;--ink:#f2f0ea;--rule:#2b2e35;--muted:#9a978f;--accent:#e0703f;--slate:#6fa8cd;--bar:#3a2a22;--warn:#f0c060;--warnbg:#2e2614;--sel:#1d2a36}}
-:root[data-theme="dark"]{--paper:#0f1013;--surface:#17191e;--ink:#f2f0ea;--rule:#2b2e35;--muted:#9a978f;--accent:#e0703f;--slate:#6fa8cd;--bar:#3a2a22;--warn:#f0c060;--warnbg:#2e2614;--sel:#1d2a36}
+:root{--paper:#f4f2ed;--surface:#fffdf9;--ink:#14161c;--rule:#dcd8ce;--muted:#6d6a63;--accent:#b4451f;--slate:#1c4e73;--warn:#8a5a00;--warnbg:#fbf0d9;--sel:#e6eef5}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#0f1013;--surface:#17191e;--ink:#f2f0ea;--rule:#2b2e35;--muted:#9a978f;--accent:#e0703f;--slate:#6fa8cd;--warn:#f0c060;--warnbg:#2e2614;--sel:#1d2a36}}
+:root[data-theme="dark"]{--paper:#0f1013;--surface:#17191e;--ink:#f2f0ea;--rule:#2b2e35;--muted:#9a978f;--accent:#e0703f;--slate:#6fa8cd;--warn:#f0c060;--warnbg:#2e2614;--sel:#1d2a36}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
@@ -52,7 +52,6 @@ th,td{padding:8px 10px;border-bottom:1px solid var(--rule);text-align:right;vert
 thead th{font-weight:600;color:var(--muted);font-size:12px;background:var(--surface);white-space:normal;min-width:72px}
 th.rh,td:first-child{text-align:left;position:sticky;left:0;background:var(--surface);z-index:1;white-space:normal;min-width:118px;max-width:200px;font-weight:600;font-size:13px;color:var(--ink)}
 td.c{cursor:pointer;position:relative;min-width:84px}
-td.c .bar{position:absolute;left:0;top:0;bottom:0;background:var(--bar);z-index:0}
 td.c .v,td.c .ci{position:relative;z-index:1;display:block}
 td.c .ci{font-size:11px;color:var(--muted)}
 td.c.sel{outline:2px solid var(--slate);outline-offset:-2px}
@@ -555,9 +554,7 @@ function render() {
       var r = find(rk, ck);
       if (!r) { h += '<td style="color:var(--muted);font-size:12px">' + t("na") + "</td>"; return; }
       var c = cellValue(r), id = R.indexOf(r._orig || r);
-      var bar = (S.show === "est" && r.statistic === "percent" && r.estimate !== null && r.flag !== "hidden")
-        ? '<span class="bar" style="width:' + Math.min(100, Math.max(0, r.estimate)).toFixed(1) + '%"></span>' : "";
-      h += '<td class="c' + (r.flag === "hidden" ? " hid" : "") + (S.sel === id ? " sel" : "") + '" data-id="' + id + '" tabindex="0">' + bar +
+      h += '<td class="c' + (r.flag === "hidden" ? " hid" : "") + (S.sel === id ? " sel" : "") + '" data-id="' + id + '" tabindex="0">' +
            '<span class="v">' + c.v + "</span>" + (c.ci ? '<span class="ci">' + c.ci + "</span>" : "") + "</td>";
     });
     h += "</tr>";

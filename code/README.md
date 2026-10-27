@@ -15,7 +15,7 @@ Web page: https://anshory1972.github.io/mbg-data/
 
 | File | What it does |
 |---|---|
-| `do/00_run_all.do` | Sets the folders and the cell rules, and runs the files below |
+| `do/00_run_all.do` | Sets the folders and the rules for showing numbers, and runs the files below |
 | `do/01_prepare.do` | Builds one person file: target groups, breakdowns, answers as 0/1 variables |
 | `do/mbgtable.do` | The command `mbgtable`, which computes one table. Read its header for details |
 | `do/02_tables.do` | One `mbgtable` call per table. Writes the CSV files |
@@ -70,11 +70,11 @@ show an effect of MBG. `all_tables.csv` has all tables in one file.
 | `split`, `split_category` | Columns of T8: MBG receipt (Recipients, Non-recipients, All) |
 | `outcome`, `outcome_label` | The answer shown, for example f_egg, Egg |
 | `statistic` | percent, mean, or total |
-| `n_persons` | People in the cell, unweighted |
+| `n_persons` | People in the group (one row and column of the table), unweighted |
 | `n_answered` | Of these, people who answered the question |
 | `n_households` | Households these people live in |
 | `n_yes` | People with this answer, unweighted (percent and total tables) |
-| `weighted_persons` | People in the cell, weighted: an estimate for Indonesia |
+| `weighted_persons` | People in the group, weighted: an estimate for Indonesia |
 | `weighted_yes` | People with this answer, weighted |
 | `estimate` | Percent (2 decimals), mean (3 decimals) or total |
 | `ci_low`, `ci_high` | 95% confidence interval. For percents it is computed on the logit scale, so it stays between 0 and 100 |
@@ -82,4 +82,4 @@ show an effect of MBG. `all_tables.csv` has all tables in one file.
 | `flag` | `hidden`: fewer than 30 people answered (30 with the answer, for totals); no estimate and no answer counts are shown. `unreliable`: RSE above 50%. `caution`: RSE above 25% |
 | `source`, `version` | Source line and the date the tables were made |
 
-The cell rules are set at the top of `do/00_run_all.do`.
+The rules for showing numbers are set at the top of `do/00_run_all.do`.

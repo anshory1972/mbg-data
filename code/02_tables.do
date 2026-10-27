@@ -235,7 +235,7 @@ forvalues i = 1/8 {
     restore
 }
 
-* summary of the cell rules
+* summary of the rules for showing numbers
 tabulate table flag, missing
 
 log close

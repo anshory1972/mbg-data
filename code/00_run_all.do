@@ -14,8 +14,8 @@ cd "E:/mbg-tables"
 * folder with the Susenas September 2025 files (BPS licence, not shared)
 global DATA "E:/mbg-absence/data"
 
-* cell rules
-global MIN_N           30   // hide cells with fewer than 30 people answering
+* rules for showing numbers
+global MIN_N           30   // hide numbers based on fewer than 30 people answering
 global RSE_CAUTION     25   // mark "caution": relative standard error above 25%
 global RSE_UNRELIABLE  50   // mark "unreliable": relative standard error above 50%
 

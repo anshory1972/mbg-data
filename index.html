@@ -193,11 +193,11 @@ var T = {
           en: "Tap a number to see its details. Small numbers below: 95% confidence interval. * less precise (relative standard error above 25%). ** not reliable (above 50%). — not shown (fewer than 30 respondents)."},
  d_est: {id: "Perkiraan", en: "Estimate"}, d_ci: {id: "Selang kepercayaan 95%", en: "95% confidence interval"},
  d_rse: {id: "Galat baku relatif (RSE)", en: "Relative standard error (RSE)"},
- d_np: {id: "Orang dalam sel (responden)", en: "People in the cell (respondents)"},
+ d_np: {id: "Orang dalam kelompok ini (responden)", en: "People in this group (respondents)"},
  d_na: {id: "Yang menjawab pertanyaan", en: "Who answered the question"},
  d_nh: {id: "Rumah tangga", en: "Households"},
  d_ny: {id: "Responden dengan jawaban ini", en: "Respondents with this answer"},
- d_wp: {id: "Orang dalam sel (tertimbang)", en: "People in the cell (weighted)"},
+ d_wp: {id: "Orang dalam kelompok ini (tertimbang)", en: "People in this group (weighted)"},
  d_wy: {id: "Orang dengan jawaban ini (tertimbang)", en: "People with this answer (weighted)"},
  f_caution: {id: "Kurang presisi: galat baku relatif (RSE) di atas 25%. Gunakan dengan hati-hati.", en: "Less precise: relative standard error above 25%. Use with care."},
  f_unreliable: {id: "Tidak andal: galat baku relatif (RSE) di atas 50%. Angka ini hanya gambaran kasar.", en: "Not reliable: relative standard error above 50%. Treat this number as a rough indication only."},
@@ -228,12 +228,12 @@ var ABOUT = {
      "<p>Susenas September 2025 mencakup 76.928 rumah tangga dan 259.865 orang di seluruh provinsi. Sampel dipilih dua tahap: BPS memilih wilayah pencacahan dalam setiap strata (provinsi, perkotaan atau perdesaan), lalu memilih rumah tangga di setiap wilayah pencacahan terpilih. Setiap rumah tangga mewakili sejumlah rumah tangga lain, sehingga hasilnya ditimbang agar mewakili seluruh penduduk Indonesia.</p>" +
      "<h3>Apa itu MBG?</h3><p>Makan Bergizi Gratis (MBG) adalah program pemerintah yang dimulai pada Januari 2025. Makanan dimasak di dapur Satuan Pelayanan Pemenuhan Gizi (SPPG) lalu diantar ke sekolah dan kelompok sasaran lain. Menurut kuesioner, sasaran MBG adalah anak sekolah dari SD sampai SMA sederajat, ibu hamil, ibu menyusui anak 0–23 bulan, dan anak balita.</p>" +
      "<h3>Pertanyaan MBG dalam Susenas</h3><p>Susenas September 2025 adalah survei nasional pertama yang menanyakan tentang MBG. Pertanyaannya disusun oleh Dewan Ekonomi Nasional bersama BPS. Untuk setiap anggota rumah tangga, survei mencatat apakah ia termasuk kelompok sasaran, apakah ia menerima MBG dalam seminggu terakhir, sejak bulan apa, berapa hari, apa menunya, dan bagaimana kualitasnya. Anak sekolah juga ditanya tentang sarapan, hari absen, dan pendapat mereka tentang MBG.</p>" +
-     "<h3>Kerahasiaan</h3><p>Data Susenas per orang dan per rumah tangga dilindungi undang-undang dan tidak dipublikasikan di sini. Halaman ini hanya berisi tabel. Sel dengan kurang dari 30 responden tidak ditampilkan.</p>",
+     "<h3>Kerahasiaan</h3><p>Data Susenas per orang dan per rumah tangga dilindungi undang-undang dan tidak dipublikasikan di sini. Halaman ini hanya berisi tabel. Angka yang dihitung dari kurang dari 30 responden tidak ditampilkan.</p>",
  en: "<h3>What is Susenas?</h3><p>The National Socio-Economic Survey (Susenas) is the main household survey of Statistics Indonesia (BPS). It has run since the 1960s and is the basis of Indonesia's official poverty and inequality figures. BPS staff interview households in person. The September round records household consumption spending in detail.</p>" +
      "<p>The September 2025 Susenas covers 76,928 households and 259,865 people in every province. The sample is drawn in two stages: BPS selects enumeration areas within each stratum (province, urban or rural), then selects households within each selected area. Each household stands for many others, so results are weighted to represent the whole population of Indonesia.</p>" +
      "<h3>What is MBG?</h3><p>Makan Bergizi Gratis (MBG, Free Nutritious Meals) is a government programme that began in January 2025. Meals are cooked in kitchens called Satuan Pelayanan Pemenuhan Gizi (SPPG) and delivered to schools and other target groups. According to the questionnaire, the target groups are school children from primary to senior secondary school, pregnant women, mothers breastfeeding a child aged 0–23 months, and children under five.</p>" +
      "<h3>The MBG questions in Susenas</h3><p>The September 2025 Susenas is the first national survey to ask about MBG. The questions were designed by the National Economic Council (Dewan Ekonomi Nasional) together with BPS. For every household member, the survey records whether the person belongs to a target group, whether they received MBG in the last week, since which month, on how many days, what the meals contained and how good they were. School children were also asked about breakfast, days absent and their views of MBG.</p>" +
-     "<h3>Confidentiality</h3><p>Susenas data on individual people and households are protected by law and are not published here. This page contains tables only. Cells with fewer than 30 respondents are not shown.</p>"
+     "<h3>Confidentiality</h3><p>Susenas data on individual people and households are protected by law and are not published here. This page contains tables only. Numbers based on fewer than 30 respondents are not shown.</p>"
 };
 var HOWTO = {
  id: "<dl class='gl'>" +
@@ -241,7 +241,7 @@ var HOWTO = {
      "<dt>Jumlah responden dan jumlah tertimbang</dt><dd>Jumlah responden adalah jumlah orang yang benar-benar diwawancarai. Jumlah tertimbang adalah perkiraan jumlah orang di Indonesia. Pilih tampilan di atas tabel.</dd>" +
      "<dt>Selang kepercayaan 95%</dt><dd>Angka kecil di bawah setiap perkiraan. Karena survei memakai sampel, angka sebenarnya kemungkinan besar berada di dalam rentang ini. Rentang dihitung dengan memperhitungkan rancangan sampel (strata dan wilayah pencacahan).</dd>" +
      "<dt>Galat baku relatif (RSE)</dt><dd>Galat baku dibagi perkiraan. Ukuran presisi perkiraan: makin kecil, makin presisi. Tanda * berarti di atas 25% (kurang presisi). Tanda ** berarti di atas 50% (tidak andal).</dd>" +
-     "<dt>Sel yang tidak ditampilkan (—)</dt><dd>Sel dengan kurang dari 30 responden tidak ditampilkan, untuk menjaga kerahasiaan dan karena angkanya terlalu tidak pasti.</dd>" +
+     "<dt>Angka yang tidak ditampilkan (—)</dt><dd>Angka yang dihitung dari kurang dari 30 responden tidak ditampilkan, untuk menjaga kerahasiaan dan karena angkanya terlalu tidak pasti.</dd>" +
      "<dt>Kuintil pengeluaran</dt><dd>Penduduk diurutkan menurut pengeluaran per kapita rumah tangga, seperti dalam penghitungan kemiskinan BPS, lalu dibagi lima kelompok sama besar. K1 adalah 20% penduduk dengan pengeluaran terendah, K5 adalah 20% tertinggi.</dd>" +
      "<dt>Perkotaan dan perdesaan</dt><dd>Klasifikasi wilayah menurut BPS.</dd>" +
      "<dt>Anak sekolah</dt><dd>Anak yang bersekolah di SD, SMP, atau SMA sederajat, termasuk Paket A–C, sekolah luar biasa, dan pesantren. Mahasiswa tidak dimasukkan karena tidak termasuk sasaran MBG.</dd>" +
@@ -255,7 +255,7 @@ var HOWTO = {
      "<dt>Respondents and weighted numbers</dt><dd>Respondents are the people actually interviewed. The weighted number is the estimated number of people in Indonesia. Choose the view above the table.</dd>" +
      "<dt>95% confidence interval</dt><dd>The small numbers below each estimate. Because the survey uses a sample, the true value is very likely within this range. It takes the sample design (strata and enumeration areas) into account.</dd>" +
      "<dt>Relative standard error (RSE)</dt><dd>The standard error divided by the estimate. Smaller means more precise. * means above 25% (less precise). ** means above 50% (not reliable).</dd>" +
-     "<dt>Cells not shown (—)</dt><dd>Cells with fewer than 30 respondents are not shown, to protect confidentiality and because the number would be too uncertain.</dd>" +
+     "<dt>Numbers not shown (—)</dt><dd>Numbers based on fewer than 30 respondents are not shown, to protect confidentiality and because they would be too uncertain.</dd>" +
      "<dt>Expenditure quintiles</dt><dd>People are ranked by household expenditure per capita, as in the BPS poverty calculation, and divided into five groups of equal size. Q1 is the 20% of people with the lowest expenditure, Q5 the 20% with the highest.</dd>" +
      "<dt>Urban and rural</dt><dd>The BPS classification of areas.</dd>" +
      "<dt>School children</dt><dd>Children attending primary, junior secondary or senior secondary school or the equivalent, including Paket A–C, special schools and pesantren. University students are left out because MBG does not cover them.</dd>" +

@@ -12,7 +12,7 @@ Web page: https://anshory1972.github.io/mbg-data/
 | `code/` | The Stata code that produces every number, with a README |
 
 Only tables are published. Susenas microdata are licensed by BPS and are not in
-this repository. Cells with fewer than 30 respondents are not shown.
+this repository. Numbers based on fewer than 30 respondents are not shown.
 
 Dewan Ekonomi Nasional (DEN). Source: BPS, Survei Sosial Ekonomi Nasional
 (Susenas) September 2025.

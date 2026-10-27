@@ -9,11 +9,11 @@
 * urban areas and rural areas, and, if split() is given, for every group of
 * the split variable (for example recipients and non-recipients), it computes:
 *
-*   n_persons         people in the cell (unweighted)
+*   n_persons         people in the group (unweighted)
 *   n_answered        of these, people who answered the question
 *   n_households      households these people live in
 *   n_yes             people with the answer (percent and total tables)
-*   weighted_persons  people in the cell, weighted (estimate for Indonesia)
+*   weighted_persons  people in the group, weighted (estimate for Indonesia)
 *   weighted_yes      people with the answer, weighted
 *   estimate          percent, mean or total
 *   ci_low, ci_high   95% confidence interval, from the survey design
@@ -84,7 +84,7 @@ program define mbgtable
                         }
                     }
 
-                    * the cell: people in the population, category, area, group
+                    * the group: people in the population, category, area and split group
                     tempvar cell hh
                     quietly generate byte `cell' = (`population' == 1 & `b' == `c' & `acond' & `scond')
 
@@ -154,7 +154,7 @@ program define mbgtable
                             local rse = cond(`b_' > 0, 100 * `se' / `b_', .)
                         }
 
-                        * cell rules
+                        * rules for showing numbers
                         local flag ""
                         if `rse' > $RSE_CAUTION    & !missing(`rse') local flag "caution"
                         if `rse' > $RSE_UNRELIABLE & !missing(`rse') local flag "unreliable"

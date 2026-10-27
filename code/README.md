@@ -4,7 +4,7 @@ Tables from the MBG questions (Blok XI, questions 1101-1113) of the September
 2025 Susenas, for a public web page on the MBG free meals programme. Only tables are
 produced. No survey record leaves the computer that runs the code.
 
-Web page: https://anshory1972.github.io/mbg-data/ (beta)
+Web page: https://anshory1972.github.io/mbg-data/
 
 ## How to run
 

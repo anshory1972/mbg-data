@@ -38,6 +38,7 @@ Data read: `ssn202509_mod_ind.dta` (persons) and `ssn202509_kp_blok43.dta`
 | `T7_children_views.csv` | More eager to learn; not hungry in class; share who agree by meal quality and complete menu | 1113, 1110, 1109 |
 | `T8_absence.csv` | Days absent and share absent at least one day, recipients and non-recipients | 1112, 1106, 1108 |
 | `T9_meal_frequency.csv` | Ate staple food, plant protein and animal protein often enough, recipients and non-recipients | 702, 704, 705 |
+| `T10_value.csv` | Value of MBG meals at programme cost: % of household spending, rupiah per household per month, recipients per household (households with recipients) | 1102-1108, 505 |
 
 Every table is given for Indonesia as a whole (`area` = Total) and for urban and
 rural areas. T8 and T9 are comparisons of recipients and non-recipients. They do
@@ -57,8 +58,15 @@ not show an effect of MBG. `all_tables.csv` has all tables in one file.
 - **Agrees (T7):** answer 3 (setuju) or 4 (sangat setuju).
 - **Complete menu (T7):** rice, an animal protein (meat, fish, chicken or egg),
   vegetables and fruit.
-- **Weights and design:** all estimates use the person weight. Confidence intervals
-  use the survey design: strata and PSU.
+- **Value of MBG (T10):** cost per portion Rp 8,000 for children under five and
+  primary grades 1-3 (grade from question 505), Rp 10,000 for pregnant and
+  breastfeeding women, primary grades 4-6, junior and senior secondary. Monthly
+  value = days with meals in the last week x cost x 4.33 weeks, summed per
+  household. The % of spending is a ratio of weighted totals. T10 is computed on
+  a household file with the household weight WERT; household deciles are formed
+  from all households, weighted by WEIND.
+- **Weights and design:** all other estimates use the person weight. Confidence
+  intervals use the survey design: strata and PSU.
 
 ## Columns of the CSV files
 
@@ -82,6 +90,7 @@ not show an effect of MBG. `all_tables.csv` has all tables in one file.
 | `ci_low`, `ci_high` | 95% confidence interval. For percents it is computed on the logit scale, so it stays between 0 and 100 |
 | `rse_pct` | Relative standard error: standard error divided by the estimate, in % |
 | `flag` | `hidden`: fewer than 30 people answered (30 with the answer, for totals); no estimate and no answer counts are shown. `unreliable`: RSE above 50%. `caution`: RSE above 25% |
+| `unit` | `persons`, or `households` for T10 (the counts are then households) |
 | `source`, `version` | Source line and the date the tables were made |
 
 The cell rules are set at the top of `do/00_run_all.do`.

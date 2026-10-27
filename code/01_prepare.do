@@ -23,7 +23,7 @@ log using "log/01_prepare.log", replace text
 * 1. Read the persons file: survey design, breakdowns and Blok XI
 *------------------------------------------------------------------------------
 
-use URUT PSU STRATA FWT M101 M105 M405 M407 M504 M702 M704 M705 ///
+use URUT PSU STRATA FWT M101 M105 M405 M407 M504 M505 M702 M704 M705 ///
     M1101-M1113B using "$DATA/ssn202509_mod_ind.dta", clear
 
 
@@ -287,14 +287,66 @@ label variable animalp "Animal protein more than 2 times a week (705)"
 
 
 *------------------------------------------------------------------------------
-* 7. Survey design and save
+* 7. Value of the MBG meals at programme cost (for T10)
+*    Tariff per portion, as in the DEN tabulation:
+*      Rp 8,000  children under five, and primary grades 1-3
+*      Rp 10,000 pregnant and breastfeeding women, primary grades 4-6,
+*                junior and senior secondary
+*    Monthly value = days with meals in the last week x tariff x 4.33 weeks
+*------------------------------------------------------------------------------
+
+generate long tariff = .
+replace tariff = 8000  if pop_under5 | (pop_school & level == 1 & inrange(M505, 1, 3))
+replace tariff = 10000 if pop_pregnant | pop_breastf | ///
+                          (pop_school & level == 1 & inrange(M505, 4, 6)) | ///
+                          (pop_school & inlist(level, 2, 3))
+generate double mbgvalue = days * tariff * 4.33 ///
+    if received == 1 & pop_targets & inrange(days, 1, 7) & !missing(tariff)
+label variable mbgvalue "Value of MBG meals per month, Rp (programme cost)"
+
+* household file: one row per household, with the household weight (WERT)
+preserve
+keep if !missing(mbgvalue)
+collapse (sum) mbgvalue (count) nrec = mbgvalue, by(URUT)
+merge 1:1 URUT using "$DATA/ssn202509_kp_blok43.dta", ///
+    keepusing(KAPITA EXPEND WERT WEIND PSU STRATA M105) nogenerate
+
+* household deciles and quintiles, from all households (weighted by WEIND,
+* the number of people the household represents)
+xtile decile   = KAPITA [pweight = WEIND], nquantiles(10)
+xtile quintile = KAPITA [pweight = WEIND], nquantiles(5)
+label values decile decile
+label values quintile quintile
+label variable decile   "Expenditure decile"
+label variable quintile "Expenditure quintile"
+
+keep if !missing(mbgvalue)
+generate byte rec_hh = 1
+generate byte all = 1
+label values all all
+generate byte urban = (M105 == 1)
+label values urban urban
+generate double valshare = mbgvalue
+label variable valshare "Value of MBG meals as % of household spending"
+label variable mbgvalue "Value of MBG meals per household per month, Rp"
+label variable nrec     "MBG recipients per household"
+label variable EXPEND   "Household spending per month, Rp"
+* -mbgtable- counts households with URUT and weights with the variable given
+svyset PSU [pweight = WERT], strata(STRATA) singleunit(centered)
+compress
+save "work/mbg_households.dta", replace
+restore
+
+
+*------------------------------------------------------------------------------
+* 8. Survey design and save
 *    Each stratum lies within one province and PSU codes are unique
 *    nationally, so the design can be declared directly.
 *------------------------------------------------------------------------------
 
 svyset PSU [pweight = FWT], strata(STRATA) singleunit(centered)
 
-drop M1101-M1113B M101 M105 M405 M504 M702 M704 M705
+drop M1101-M1113B M101 M105 M405 M504 M505 M702 M704 M705
 compress
 save "work/mbg_module.dta", replace
 

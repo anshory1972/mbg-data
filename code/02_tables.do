@@ -26,7 +26,7 @@ postfile mbgpost str4 table str100 title str100 population str40 question ///
     str12 outcome str70 outcome_label str7 statistic ///
     double(n_persons n_answered n_households n_yes ///
     weighted_persons weighted_yes estimate ci_low ci_high rse_pct) str10 flag ///
-    using "work/results.dta", replace
+    str10 unit using "work/results.dta", replace
 
 local SCHOOL "School children, primary to senior secondary"
 local B3     "Pregnant women, breastfeeding mothers and children under five (B3)"
@@ -211,9 +211,31 @@ mbgtable staple plantp animalp, table(T9) title("`ttl'") population(pop_school) 
 mbgtable staple plantp animalp, table(T9) title("`ttl'") population(pop_b3) ///
     poplabel("`B3'") by(all) split(mbg) stat(percent) question("702, 704, 705")
 
+mbgtable staple plantp animalp, table(T9) title("`ttl'") population(pop_targets) ///
+    poplabel("`ALLT'") by(all) split(mbg) stat(percent) question("702, 704, 705")
+
 mbgtable staple plantp animalp, table(T9) title("`ttl'") population(pop_asked) ///
     poplabel("Everyone asked about MBG (target groups, including university students)") ///
     by(all) split(mbg) stat(percent) question("702, 704, 705")
+
+
+*------------------------------------------------------------------------------
+* T10. Value of MBG meals at programme cost, households with recipients
+*      Household file and household weight (WERT); see 01_prepare.do, part 7.
+*------------------------------------------------------------------------------
+
+use "work/mbg_households.dta", clear
+local HH "Households with MBG recipients"
+local ttl "Value of MBG meals at programme cost"
+
+mbgtable valshare EXPEND, table(T10) title("`ttl'") population(rec_hh) poplabel("`HH'") ///
+    by(all decile quintile) stat(ratio) weight(WERT) question("1102-1108, 505")
+
+mbgtable mbgvalue, table(T10) title("`ttl'") population(rec_hh) poplabel("`HH'") ///
+    by(all decile quintile) stat(mean) weight(WERT) question("1102-1108, 505")
+
+mbgtable nrec, table(T10) title("`ttl'") population(rec_hh) poplabel("`HH'") ///
+    by(all decile quintile) stat(mean) weight(WERT) question("1102-1106")
 
 postclose mbgpost
 
@@ -225,9 +247,9 @@ postclose mbgpost
 use "work/results.dta", clear
 
 * rounding: percent to 2 decimals, mean to 3 decimals, totals to whole people
-replace estimate = round(estimate, 0.01)  if statistic == "percent"
-replace ci_low   = round(ci_low, 0.01)    if statistic == "percent"
-replace ci_high  = round(ci_high, 0.01)   if statistic == "percent"
+replace estimate = round(estimate, 0.01)  if inlist(statistic, "percent", "ratio")
+replace ci_low   = round(ci_low, 0.01)    if inlist(statistic, "percent", "ratio")
+replace ci_high  = round(ci_high, 0.01)   if inlist(statistic, "percent", "ratio")
 replace estimate = round(estimate, 0.001) if statistic == "mean"
 replace ci_low   = round(ci_low, 0.001)   if statistic == "mean"
 replace ci_high  = round(ci_high, 0.001)  if statistic == "mean"
@@ -249,8 +271,8 @@ export delimited using "output/all_tables.csv", replace datafmt
 
 local names T1 "coverage" T2 "recipients" T3 "start_month" T4 "days" ///
             T5 "foods" T6 "quality" T7 "children_views" T8 "absence" ///
-            T9 "meal_frequency"
-forvalues i = 1/9 {
+            T9 "meal_frequency" T10 "value"
+forvalues i = 1/10 {
     local n : word `=2*`i'' of `names'
     preserve
     keep if table == "T`i'"

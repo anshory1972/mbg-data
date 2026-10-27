@@ -313,7 +313,7 @@ var MEASURE = {
 };
 var BY = {
  "Indonesia": {id: "Indonesia", en: "Indonesia"},
- "__area": {id: "Wilayah (perkotaan/perdesaan)", en: "Area (urban/rural)"},
+ "__area": {id: "Wilayah (Indonesia, perkotaan, perdesaan)", en: "Area (Indonesia, urban, rural)"},
  "Expenditure decile": {id: "Desil pengeluaran", en: "Expenditure decile"},
  "Expenditure quintile": {id: "Kuintil pengeluaran", en: "Expenditure quintile"},
  "School level": {id: "Jenjang sekolah", en: "School level"},
@@ -445,7 +445,9 @@ function sync() {
   wMeasure.classList.toggle("hidden", ms.length < 2);
   var bys = uniq(rowsFor(S.table, S.pop, S.measure).map(function (r) { return r.breakdown; }));
   // urban/rural as a breakdown: built from the national rows (Total, Urban, Rural)
-  if (bys.indexOf("Indonesia") >= 0) bys.push("__area");
+  // it replaces the "Indonesia" option, which showed the same numbers
+  var iInd = bys.indexOf("Indonesia");
+  if (iInd >= 0) bys.splice(iInd, 1, "__area");
   bys.sort(function (a, b) { return BYORDER.indexOf(a) - BYORDER.indexOf(b); });
   if (bys.indexOf(S.by) < 0) S.by = bys[0];
   fillSelect(sBy, bys, function (v) { return tr(BY, v); }, S.by);
@@ -518,10 +520,10 @@ function render() {
     }
     return null;
   }
-  function rowLabel(k) { return (mode === "out-area" || mode === "out-split") ? outLabel(k) : byArea ? areaLabel(k) : tr(CAT, k); }
+  function rowLabel(k) { return (mode === "out-area" || mode === "out-split") ? outLabel(k) : byArea ? (k === "Total" ? "Indonesia" : areaLabel(k)) : tr(CAT, k); }
   function colLabel(k) { return mode === "cat-out" ? outLabel(k) : (mode === "cat-split" || mode === "out-split") ? tr(SPLITCAT, k) : areaLabel(k); }
 
-  var head = (mode === "out-area" || mode === "out-split") ? "" : tr(BY, S.by);
+  var head = (mode === "out-area" || mode === "out-split") ? "" : byArea ? (S.lang === "id" ? "Wilayah" : "Area") : tr(BY, S.by);
   var h = '<thead><tr><th scope="col" class="rh">' + esc(head) + "</th>" +
           colKeys.map(function (k) { return '<th scope="col">' + esc(colLabel(k)) + "</th>"; }).join("") + "</tr></thead><tbody>";
   rowKeys.forEach(function (rk) {

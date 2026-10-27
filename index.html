@@ -174,7 +174,7 @@ var T = {
           en: "Beta version. This page is still under development. The numbers and layout may change."},
  h1: {id: "Program Makan Bergizi Gratis (MBG) menurut Susenas September 2025",
       en: "The Free Nutritious Meals programme (MBG) in the September 2025 Susenas"},
- lead: {id: "Susenas September 2025 dari Badan Pusat Statistik (BPS) adalah survei nasional pertama yang menanyakan tentang MBG. Halaman ini menampilkan tabel dari pertanyaan-pertanyaan tersebut. Setiap angka menunjukkan pertanyaan asalnya, jumlah responden, dan tingkat presisinya.",
+ lead: {id: "Susenas September 2025 dari Badan Pusat Statistik (BPS) adalah survei nasional pertama yang menanyakan tentang MBG. Halaman ini menampilkan tabel dari pertanyaan-pertanyaan tersebut. Setiap angka menunjukkan pertanyaan asalnya, jumlah responden, dan tingkat presisinya (precision).",
         en: "The September 2025 Susenas of Statistics Indonesia (BPS) is the first national survey to ask about MBG. This page shows tables from those questions. Every number shows the question it comes from, the number of respondents and how precise it is."},
  n_tab: {id: "Tabel", en: "Tables"}, n_q: {id: "Kuesioner", en: "Questionnaire"},
  n_s: {id: "Tentang Susenas", en: "About Susenas"}, n_r: {id: "Cara membaca angka", en: "How to read the numbers"},
@@ -188,18 +188,18 @@ var T = {
  show_n: {id: "Jumlah responden", en: "Respondents"},
  cmp: {id: "Perbandingan penerima dan bukan penerima menunjukkan perbedaan, bukan bukti bahwa MBG menjadi penyebabnya.",
        en: "Comparing recipients and non-recipients shows differences, not proof that MBG caused them."},
- legend: {id: "Ketuk angka untuk melihat rinciannya. Angka kecil di bawah: selang kepercayaan 95%. * kurang presisi (galat baku relatif/RSE di atas 25%). ** tidak andal (RSE di atas 50%). — tidak ditampilkan (kurang dari 30 responden).",
+ legend: {id: "Ketuk angka untuk melihat rinciannya. Angka kecil di bawah: selang kepercayaan 95% (confidence interval). * kurang presisi: galat baku relatif (relative standard error, RSE) di atas 25%. ** tidak andal: RSE di atas 50%. — tidak ditampilkan (kurang dari 30 responden).",
           en: "Tap a number to see its details. Small numbers below: 95% confidence interval. * less precise (relative standard error above 25%). ** not reliable (above 50%). — not shown (fewer than 30 respondents)."},
- d_est: {id: "Perkiraan", en: "Estimate"}, d_ci: {id: "Selang kepercayaan 95%", en: "95% confidence interval"},
- d_rse: {id: "Galat baku relatif (RSE)", en: "Relative standard error (RSE)"},
+ d_est: {id: "Perkiraan", en: "Estimate"}, d_ci: {id: "Selang kepercayaan 95% (confidence interval)", en: "95% confidence interval"},
+ d_rse: {id: "Galat baku relatif (relative standard error, RSE)", en: "Relative standard error (RSE)"},
  d_np: {id: "Orang dalam sel (responden)", en: "People in the cell (respondents)"},
  d_na: {id: "Yang menjawab pertanyaan", en: "Who answered the question"},
  d_nh: {id: "Rumah tangga", en: "Households"},
  d_ny: {id: "Responden dengan jawaban ini", en: "Respondents with this answer"},
  d_wp: {id: "Orang dalam sel (tertimbang)", en: "People in the cell (weighted)"},
  d_wy: {id: "Orang dengan jawaban ini (tertimbang)", en: "People with this answer (weighted)"},
- f_caution: {id: "Kurang presisi: galat baku relatif (RSE) di atas 25%. Gunakan dengan hati-hati.", en: "Less precise: relative standard error above 25%. Use with care."},
- f_unreliable: {id: "Tidak andal: galat baku relatif (RSE) di atas 50%. Angka ini hanya gambaran kasar.", en: "Not reliable: relative standard error above 50%. Treat this number as a rough indication only."},
+ f_caution: {id: "Kurang presisi (less precise): galat baku relatif (relative standard error, RSE) di atas 25%. Gunakan dengan hati-hati.", en: "Less precise: relative standard error above 25%. Use with care."},
+ f_unreliable: {id: "Tidak andal (unreliable): galat baku relatif (relative standard error, RSE) di atas 50%. Angka ini hanya gambaran kasar.", en: "Not reliable: relative standard error above 50%. Treat this number as a rough indication only."},
  f_hidden: {id: "Tidak ditampilkan: kurang dari 30 responden.", en: "Not shown: fewer than 30 respondents."},
  s_q: {id: "Pertanyaan dalam kuesioner BPS (VSEN25.M)", en: "Question in the BPS questionnaire (VSEN25.M)"},
  s_pop: {id: "Kelompok", en: "Group"},
@@ -238,8 +238,8 @@ var HOWTO = {
  id: "<dl class='gl'>" +
      "<dt>Tertimbang</dt><dd>Semua angka memakai penimbang orang dari BPS. Persen dan jumlah orang adalah perkiraan untuk seluruh penduduk Indonesia, bukan hanya untuk orang yang diwawancarai.</dd>" +
      "<dt>Jumlah responden dan jumlah tertimbang</dt><dd>Jumlah responden adalah jumlah orang yang benar-benar diwawancarai. Jumlah tertimbang adalah perkiraan jumlah orang di Indonesia. Pilih tampilan di atas tabel.</dd>" +
-     "<dt>Selang kepercayaan 95%</dt><dd>Angka kecil di bawah setiap perkiraan. Karena survei memakai sampel, angka sebenarnya kemungkinan besar berada di dalam rentang ini. Rentang dihitung dengan memperhitungkan rancangan sampel (strata dan wilayah pencacahan).</dd>" +
-     "<dt>Galat baku relatif (RSE)</dt><dd>Galat baku dibagi perkiraan. Ukuran presisi perkiraan: makin kecil, makin presisi. Tanda * berarti di atas 25% (kurang presisi). Tanda ** berarti di atas 50% (tidak andal).</dd>" +
+     "<dt>Selang kepercayaan 95% (confidence interval)</dt><dd>Angka kecil di bawah setiap perkiraan. Karena survei memakai sampel, angka sebenarnya kemungkinan besar berada di dalam rentang ini. Rentang dihitung dengan memperhitungkan rancangan sampel (strata dan wilayah pencacahan).</dd>" +
+     "<dt>Galat baku relatif (relative standard error, RSE)</dt><dd>Galat baku (standard error) dibagi perkiraan. Ukuran presisi (precision) perkiraan: makin kecil, makin presisi. Tanda * berarti di atas 25% (kurang presisi). Tanda ** berarti di atas 50% (tidak andal).</dd>" +
      "<dt>Sel yang tidak ditampilkan (—)</dt><dd>Sel dengan kurang dari 30 responden tidak ditampilkan, untuk menjaga kerahasiaan dan karena angkanya terlalu tidak pasti.</dd>" +
      "<dt>Kuintil pengeluaran</dt><dd>Penduduk diurutkan menurut pengeluaran per kapita rumah tangga, seperti dalam penghitungan kemiskinan BPS, lalu dibagi lima kelompok sama besar. K1 adalah 20% penduduk dengan pengeluaran terendah, K5 adalah 20% tertinggi.</dd>" +
      "<dt>Perkotaan dan perdesaan</dt><dd>Klasifikasi wilayah menurut BPS.</dd>" +

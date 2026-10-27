@@ -245,13 +245,6 @@ label define complete 1 "Complete menu" 0 "Menu not complete"
 label values complete complete
 label variable complete "Menu: rice, animal protein, vegetables and fruit"
 
-generate byte mealdays = 1 if inlist(M1108, 1, 2)
-replace       mealdays = 2 if inlist(M1108, 3, 4)
-replace       mealdays = 3 if inrange(M1108, 5, 7)
-label define mealdays 1 "1-2 days" 2 "3-4 days" 3 "5-6 days"
-label values mealdays mealdays
-label variable mealdays "Days with MBG meals in the last week"
-
 
 *------------------------------------------------------------------------------
 * 6. School absence (1112), for the comparison of recipients and non-recipients

@@ -192,11 +192,6 @@ mbgtable absdays, table(T8) title("`ttl'") population(pop_school) poplabel("`SCH
 mbgtable absent1, table(T8) title("`ttl'") population(pop_school) poplabel("`SCHOOL'") ///
     by(all quintile level) split(mbg) stat(percent) question("1112, 1106")
 
-* recipients only, by days with MBG meals
-mbgtable absdays, table(T8) title("`ttl'") population(rec_school) ///
-    poplabel("School children receiving MBG") ///
-    by(all mealdays quintile) stat(mean) question("1112, 1108")
-
 
 postclose mbgpost
 

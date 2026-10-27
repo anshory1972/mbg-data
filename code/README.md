@@ -35,7 +35,7 @@ Data read: `ssn202509_mod_ind.dta` (persons) and `ssn202509_kp_blok43.dta`
 | `T5_foods.csv` | Foods in the meals, and number of the nine named foods | 1109 |
 | `T6_quality.csv` | Rated quality of the meals | 1110 |
 | `T7_children_views.csv` | More eager to learn; not hungry in class; share who agree by meal quality and complete menu | 1113, 1110, 1109 |
-| `T8_absence.csv` | Days absent and share absent at least one day, recipients and non-recipients | 1112, 1106, 1108 |
+| `T8_absence.csv` | Days absent and share absent at least one day, recipients and non-recipients | 1112, 1106 |
 
 Every table is given for Indonesia as a whole (`area` = Total) and for urban and
 rural areas. T8 is a comparison of recipients and non-recipients. It does not

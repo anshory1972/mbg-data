@@ -176,6 +176,10 @@ var T = {
  c_topic: {id: "Topik", en: "Topic"}, c_pop: {id: "Kelompok", en: "Group"},
  c_measure: {id: "Ukuran", en: "Measure"}, c_by: {id: "Rincian menurut", en: "Breakdown"},
  na: {id: "tidak ada", en: "none"},
+ wnote: {id: "Angka tertimbang dengan penimbang BPS, sehingga mewakili seluruh penduduk Indonesia. Angka tanpa penimbang tidak mewakili penduduk, karena setiap responden mewakili jumlah orang yang berbeda.",
+         en: "Weighted with the BPS weights, so the numbers represent the whole population of Indonesia. Unweighted numbers do not, because each respondent represents a different number of people."},
+ wnote_n: {id: "Jumlah responden tidak tertimbang. Jangan dipakai untuk menghitung persen atau rata-rata, karena setiap responden mewakili jumlah orang yang berbeda.",
+           en: "Respondent counts are unweighted. Do not use them to compute percentages or averages, because each respondent represents a different number of people."},
  swipe: {id: "Geser tabel ke kanan untuk melihat kolom lainnya →", en: "Swipe the table to the right to see more columns →"},
  c_show: {id: "Tampilkan", en: "Show"}, c_area: {id: "Wilayah", en: "Area"}, c_out: {id: "Jawaban", en: "Answer"},
  show_pct: {id: "Persen", en: "Percent"},
@@ -496,6 +500,7 @@ function render() {
   // for counts, the weighted view repeats the estimate, so it is not offered
   S.stat = rows.length ? rows[0].statistic : "percent";
   if ((S.stat === "total" || S.table === "T1") && S.show === "w") S.show = "est";
+  if (S.stat === "mean") S.show = "est";
   var hasSplit = rows.some(function (r) { return r.split_category; });
   // with a split (recipients / non-recipients) and several rows, show one answer at a time
   var outsAll = uniq(rows.map(function (r) { return r.outcome; }));
@@ -571,6 +576,7 @@ function render() {
   var qn = r0.question || "";
   unitline.innerHTML = (S.lang === "id" ? "Satuan: " : "Unit: ") + esc(UNIT[ukey][S.lang]) +
     (qn ? ' <span>· ' + (S.lang === "id" ? "Pertanyaan " : "Question ") + esc(qn) + "</span>" : "");
+  desc += " " + t(S.show === "n" ? "wnote_n" : "wnote");
   tblsub.textContent = desc + (areaSel ? " " + (S.lang === "id" ? "Wilayah: " : "Area: ") + areaLabel(S.area) + "." : "") + " BPS, Susenas September 2025.";
   renderDetail(); renderSource(r0); renderSeg();
 }
@@ -579,6 +585,8 @@ function renderSeg() {
   var estKey = S.stat === "mean" ? "show_mean" : S.stat === "total" ? "show_total" : "show_pct";
   var btns = [["est", estKey], ["w", "show_w"], ["n", "show_n"]];
   if (S.stat === "total" || S.table === "T1") btns.splice(1, 1);
+  if (S.stat === "mean") btns = btns.slice(0, 1);
+  gShow.parentElement.classList.toggle("hidden", btns.length < 2);
   gShow.innerHTML = btns.map(function (p) {
     return '<button type="button" data-show="' + p[0] + '" aria-pressed="' + (S.show === p[0]) + '">' + t(p[1]) + "</button>";
   }).join("");

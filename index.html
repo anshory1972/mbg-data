@@ -471,14 +471,14 @@ function cellValue(r) {
   var pct = r.statistic === "percent";
   if (S.show === "est") {
     if (r.estimate === null) v = "—";
-    else v = pct ? num(r.estimate, 1) + "%" : r.statistic === "mean" ? num(r.estimate, 2) : compact(r.estimate);
+    else v = pct ? num(r.estimate, 1) : r.statistic === "mean" ? num(r.estimate, 2) : full(r.estimate);
     if (r.ci_low !== null && r.ci_high !== null) {
-      ci = r.statistic === "total" ? compact(r.ci_low) + "– " + compact(r.ci_high)
+      ci = r.statistic === "total" ? full(r.ci_low) + "– " + full(r.ci_high)
          : num(r.ci_low, pct ? 1 : 2) + "–" + num(r.ci_high, pct ? 1 : 2);
     }
   } else if (S.show === "w") {
     var w = r.statistic === "mean" ? r.weighted_persons : r.weighted_yes;
-    v = w === null ? "—" : compact(w);
+    v = w === null ? "—" : full(w);
   } else {
     var n = r.statistic === "mean" ? r.n_answered : r.n_yes;
     v = n === null ? "—" : full(n);

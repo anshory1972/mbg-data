@@ -218,7 +218,7 @@ var T = {
                 en: "Tap an image to open it at full size. Source: BPS, questionnaire VSEN25.M, pages 13 and 14."},
  s_h: {id: "Tentang Susenas dan MBG", en: "About Susenas and MBG"},
  r_h: {id: "Cara membaca angka", en: "How to read the numbers"},
- used: {id: "Dipakai di tabel: ", en: "Used in table: "}, notused: {id: "Belum ditabelkan di halaman ini.", en: "Not yet tabulated on this page."},
+ used: {id: "Dipakai di topik: ", en: "Used in topic: "}, notused: {id: "Belum ditabelkan di halaman ini.", en: "Not yet tabulated on this page."},
  total: {id: "Total", en: "Total"}, Urban: {id: "Perkotaan", en: "Urban"}, Rural: {id: "Perdesaan", en: "Rural"},
  foot: {id: "Dewan Ekonomi Nasional. Sumber data: BPS, Survei Sosial Ekonomi Nasional (Susenas) September 2025. Versi beta, tabel dibuat ",
         en: "National Economic Council (Dewan Ekonomi Nasional). Data source: BPS, National Socio-Economic Survey (Susenas) September 2025. Beta version, tables made "}
@@ -635,7 +635,7 @@ function renderSource(r) {
 function renderQuestions() {
   qlist.innerHTML = QS.map(function (q) {
     return '<div class="qi"><div class="code">' + esc(q[0]) + '</div><p class="id">' + esc(q[1]) + '</p><p class="en">' + esc(q[2]) +
-           '</p><div class="use">' + (q[3] ? t("used") + esc(q[3]) : t("notused")) + "</div></div>";
+           '</p><div class="use">' + (q[3] ? t("used") + esc(q[3].split(/,\s*/).map(function (c) { return tr(TOPIC, c); }).join(", ")) : t("notused")) + "</div></div>";
   }).join("");
 }
 function renderStatic() {

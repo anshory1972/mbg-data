@@ -183,7 +183,9 @@ var T = {
  na: {id: "tidak ada", en: "none"},
  swipe: {id: "Geser tabel ke kanan untuk melihat kolom lainnya →", en: "Swipe the table to the right to see more columns →"},
  c_show: {id: "Tampilkan", en: "Show"}, c_area: {id: "Wilayah", en: "Area"}, c_out: {id: "Jawaban", en: "Answer"},
- show_est: {id: "Persen / nilai", en: "Percent / value"},
+ show_pct: {id: "Persen", en: "Percent"},
+ show_mean: {id: "Rata-rata", en: "Average"},
+ show_total: {id: "Jumlah (perkiraan)", en: "Number (estimate)"},
  show_w: {id: "Jumlah tertimbang", en: "Weighted number"},
  show_n: {id: "Jumlah responden", en: "Respondents"},
  cmp: {id: "Perbandingan penerima dan bukan penerima menunjukkan perbedaan, bukan bukti bahwa MBG menjadi penyebabnya.",
@@ -494,6 +496,9 @@ function render() {
     // rows become Total / Urban / Rural; _orig keeps the data row for the detail panel
     rows = rows.map(function (r) { var o = {}; for (var k in r) o[k] = r[k]; o.category = r.area; o.area = "Total"; o._orig = r; return o; });
   }
+  // for counts, the weighted view repeats the estimate, so it is not offered
+  S.stat = rows.length ? rows[0].statistic : "percent";
+  if (S.stat === "total" && S.show === "w") S.show = "est";
   var hasSplit = rows.some(function (r) { return r.split_category; });
   // with a split (recipients / non-recipients) and several rows, show one answer at a time
   var outsAll = uniq(rows.map(function (r) { return r.outcome; }));
@@ -573,7 +578,11 @@ function render() {
   renderDetail(); renderSource(r0); renderSeg();
 }
 function renderSeg() {
-  gShow.innerHTML = [["est", "show_est"], ["w", "show_w"], ["n", "show_n"]].map(function (p) {
+  // the first button names what the table shows
+  var estKey = S.stat === "mean" ? "show_mean" : S.stat === "total" ? "show_total" : "show_pct";
+  var btns = [["est", estKey], ["w", "show_w"], ["n", "show_n"]];
+  if (S.stat === "total") btns.splice(1, 1);
+  gShow.innerHTML = btns.map(function (p) {
     return '<button type="button" data-show="' + p[0] + '" aria-pressed="' + (S.show === p[0]) + '">' + t(p[1]) + "</button>";
   }).join("");
   gArea.innerHTML = AREAS.map(function (a) {

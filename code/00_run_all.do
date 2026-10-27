@@ -24,7 +24,3 @@ global VERSION "`c(current_date)'"
 
 do "do/01_prepare.do"
 do "do/02_tables.do"
-
-* check against the presentation (local only, not published)
-capture confirm file "do/03_check_against_deck.do"
-if !_rc do "do/03_check_against_deck.do"

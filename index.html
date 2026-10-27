@@ -87,7 +87,8 @@ a{color:var(--slate)}
 .swipe{font-size:12px;color:var(--slate);margin:0 0 6px}
 @media (max-width:480px){h1{font-size:23px}table{font-size:12px}th,td{padding:6px 5px}
  th.rh,td:first-child{min-width:78px;max-width:104px;font-size:12px}
- td.c{min-width:60px}thead th{min-width:56px;font-size:11px}}
+ td.c{min-width:60px}thead th{min-width:56px;font-size:11px}
+ td.c .ci{white-space:normal;word-break:break-word}}
 </style>
 </head>
 <body>
@@ -456,8 +457,8 @@ function cellValue(r) {
     if (r.estimate === null) v = "—";
     else v = pct ? num(r.estimate, r.statistic === "ratio" ? 2 : 1) + "%" : rp ? "Rp" + full(r.estimate) : r.statistic === "mean" ? num(r.estimate, 2) : compact(r.estimate);
     if (r.ci_low !== null && r.ci_high !== null) {
-      ci = r.statistic === "total" ? compact(r.ci_low) + "–" + compact(r.ci_high)
-         : rp ? full(r.ci_low) + "–" + full(r.ci_high)
+      ci = r.statistic === "total" ? compact(r.ci_low) + "– " + compact(r.ci_high)
+         : rp ? full(r.ci_low) + "– " + full(r.ci_high)
          : num(r.ci_low, r.statistic === "percent" ? 1 : 2) + "–" + num(r.ci_high, r.statistic === "percent" ? 1 : 2);
     }
   } else if (S.show === "w") {

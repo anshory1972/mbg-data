@@ -5,7 +5,7 @@
 * to the results file. 02_tables.do runs this file once and then calls
 * -mbgtable- for each table.
 *
-* For every breakdown category (for example decile 1), for the whole country,
+* For every breakdown category (for example quintile 1), for the whole country,
 * urban areas and rural areas, and, if split() is given, for every group of
 * the split variable (for example recipients and non-recipients), it computes:
 *
@@ -34,7 +34,7 @@
 *   title       title of the table
 *   population  0/1 variable marking the people the table is about
 *   poplabel    description of those people
-*   by          breakdown variables (rows), for example: all decile province
+*   by          breakdown variables (rows), for example: all quintile province
 *   split       optional second breakdown (columns), for example: mbg
 *   stat        percent (0/1 answers), mean, total (weighted number of 1s),
 *               or ratio (two variables: numerator denominator; the estimate

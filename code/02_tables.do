@@ -264,7 +264,7 @@ format estimate ci_low ci_high %15.10g
 format weighted_persons weighted_yes n_* %15.0f
 format rse_pct %8.4g
 
-generate source = "BPS, Susenas September 2025, questionnaire VSEN25.M. Weighted. Computed at Universitas Padjadjaran."
+generate source = "BPS, Susenas September 2025, questionnaire VSEN25.M. Weighted."
 generate version = "$VERSION"
 
 export delimited using "output/all_tables.csv", replace datafmt

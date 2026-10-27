@@ -16,5 +16,5 @@ This is a beta version. The numbers and the page may still change.
 Only tables are published. Susenas microdata are licensed by BPS and are not in
 this repository. Cells with fewer than 30 respondents are not shown.
 
-Source: BPS, Survei Sosial Ekonomi Nasional (Susenas) September 2025. Tables
-computed at Universitas Padjadjaran.
+Dewan Ekonomi Nasional (DEN). Source: BPS, Survei Sosial Ekonomi Nasional
+(Susenas) September 2025.

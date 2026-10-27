@@ -42,7 +42,7 @@ select{display:block;width:100%;margin-top:4px;min-height:44px;padding:8px 10px;
 .row2{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:12px}
 @media (min-width:700px){.row2{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .ttl{font:600 17px/1.35 Georgia,serif;margin:6px 0 2px}
-.sub{font-size:13px;color:var(--muted);margin:0 0 10px}
+.sub{font-size:14px;color:var(--ink);margin:0 0 10px;max-width:760px}
 .cmp{font-size:13px;color:var(--warn);background:var(--warnbg);border-radius:8px;padding:6px 10px;margin:0 0 10px}
 .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--rule);border-radius:8px}
 table{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
@@ -311,6 +311,28 @@ var MEASURE = {
  value: {id: "Nilai per rumah tangga per bulan (Rp)", en: "Value per household per month (Rp)"},
  nrec: {id: "Penerima per rumah tangga", en: "Recipients per household"}
 };
+// one sentence above each table: what the number is
+var DESC = {
+ received: {id: "Persen orang dalam kelompok ini yang menerima MBG dalam seminggu terakhir.", en: "Percent of people in this group who received MBG in the last week."},
+ received_total: {id: "Perkiraan jumlah orang di Indonesia yang menerima MBG dalam seminggu terakhir.", en: "Estimated number of people in Indonesia who received MBG in the last week."},
+ month: {id: "Persen penerima menurut bulan pertama kali menerima MBG pada 2025. Jumlah satu baris = 100%.", en: "Percent of recipients by the month they first received MBG in 2025. Each row adds up to 100%."},
+ mgroup: {id: "Persen penerima menurut bulan pertama kali menerima MBG pada 2025. Jumlah satu baris = 100%.", en: "Percent of recipients by the month they first received MBG in 2025. Each row adds up to 100%."},
+ days: {id: "Rata-rata jumlah hari menerima MBG dalam seminggu terakhir (1 sampai 6 hari).", en: "Average number of days with MBG meals in the last week (1 to 6 days)."},
+ ddist: {id: "Persen penerima menurut jumlah hari menerima MBG dalam seminggu terakhir. Jumlah satu baris = 100%.", en: "Percent of recipients by the number of days with MBG meals in the last week. Each row adds up to 100%."},
+ foods: {id: "Persen penerima yang mendapat jenis makanan ini dalam menu MBG seminggu terakhir. Satu orang bisa mendapat beberapa jenis, jadi jumlahnya lebih dari 100%.", en: "Percent of recipients who got this food in their MBG meals in the last week. One person can get several foods, so the row adds up to more than 100%."},
+ nfoods: {id: "Rata-rata jumlah jenis makanan dalam menu MBG seminggu terakhir, dari 9 jenis: nasi, daging, ikan, ayam, telur, tahu/tempe, sayur, susu, buah. Angka 9 berarti semua jenis ada dalam menu minggu itu.", en: "Average number of the 9 named foods in the MBG meals of the last week: rice, meat, fish, chicken, egg, tofu/tempe, vegetables, milk, fruit. 9 means every food was on the menu that week."},
+ quality: {id: "Persen penerima menurut penilaian kualitas makanan MBG seminggu terakhir. Jumlah satu baris = 100%.", en: "Percent of recipients by their rating of the MBG meals in the last week. Each row adds up to 100%."},
+ eager: {id: "Persen anak penerima menurut jawaban: MBG membuat lebih bersemangat belajar. Jumlah satu baris = 100%.", en: "Percent of recipient children by answer: MBG makes me more eager to learn. Each row adds up to 100%."},
+ hungry: {id: "Persen anak penerima menurut jawaban: dengan MBG tidak lapar saat pelajaran. Jumlah satu baris = 100%.", en: "Percent of recipient children by answer: with MBG I am not hungry in class. Each row adds up to 100%."},
+ views2: {id: "Persen anak penerima yang setuju atau sangat setuju.", en: "Percent of recipient children who agree or strongly agree."},
+ absdays: {id: "Rata-rata hari tidak masuk sekolah dalam seminggu terakhir, bukan karena libur.", en: "Average days absent from school in the last week, not counting school holidays."},
+ absent1: {id: "Persen anak yang tidak masuk sekolah minimal 1 hari dalam seminggu terakhir.", en: "Percent of children absent from school at least 1 day in the last week."},
+ foodfreq: {id: "Persen orang yang makan cukup sering dalam seminggu terakhir: makanan pokok lebih dari 13 kali, protein nabati lebih dari 3 kali, protein hewani lebih dari 2 kali.", en: "Percent of people who ate often enough in the last week: staples more than 13 times, plant protein more than 3 times, animal protein more than 2 times."},
+ valshare: {id: "Nilai MBG menurut tarif, sebagai persen pengeluaran rumah tangga per bulan.", en: "Value of MBG at programme cost, as a percent of monthly household spending."},
+ value: {id: "Rata-rata nilai MBG menurut tarif per rumah tangga per bulan, dalam rupiah.", en: "Average value of MBG at programme cost per household per month, in rupiah."},
+ nrec: {id: "Rata-rata jumlah penerima MBG per rumah tangga.", en: "Average number of MBG recipients per household."}
+};
+
 var BY = {
  "Indonesia": {id: "Indonesia", en: "Indonesia"},
  "__area": {id: "Wilayah (Indonesia, perkotaan, perdesaan)", en: "Area (Indonesia, urban, rural)"},
@@ -550,8 +572,11 @@ function render() {
            : stat === "ratio" ? tr(MEASURE, "valshare")
            : r0.outcome === "mbgvalue" ? (S.lang === "id" ? "Rupiah per bulan" : "Rupiah per month")
            : stat === "mean" ? (S.lang === "id" ? "Rata-rata" : "Mean") : (S.lang === "id" ? "Jumlah orang" : "Number of people");
-  tblsub.textContent = (S.show === "est" ? unit : S.show === "w" ? t("show_w") : t("show_n")) +
-    (areaSel ? ", " + areaLabel(S.area) : "") + ". BPS, Susenas September 2025.";
+  var dkey = S.measure === "received" && stat === "total" ? "received_total" : S.measure;
+  var desc = DESC[dkey] ? DESC[dkey][S.lang] : unit + ".";
+  if (S.show === "w") desc = t("show_w") + (S.lang === "id" ? " orang dengan jawaban ini, perkiraan untuk seluruh Indonesia." : " of people with this answer, an estimate for all of Indonesia.");
+  if (S.show === "n") desc = t("show_n") + (S.lang === "id" ? ": jumlah orang yang benar-benar diwawancarai." : ": the number of people actually interviewed.");
+  tblsub.textContent = desc + (areaSel ? " " + (S.lang === "id" ? "Wilayah: " : "Area: ") + areaLabel(S.area) + "." : "") + " BPS, Susenas September 2025.";
   renderDetail(); renderSource(r0); renderSeg();
 }
 function renderSeg() {

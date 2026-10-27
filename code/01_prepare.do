@@ -23,7 +23,7 @@ log using "log/01_prepare.log", replace text
 * 1. Read the persons file: survey design, breakdowns and Blok XI
 *------------------------------------------------------------------------------
 
-use URUT PSU STRATA FWT M101 M105 M405 M407 M504 M702 M704 M705 ///
+use URUT PSU STRATA FWT M101 M105 M405 M407 M504 ///
     M1101-M1113B using "$DATA/ssn202509_mod_ind.dta", clear
 
 
@@ -105,9 +105,6 @@ label variable received "Received MBG in the last week"
 generate byte pop_b3      = (pop_pregnant | pop_breastf | pop_under5)
 * all target groups: school children and B3
 generate byte pop_targets = (pop_school | pop_b3)
-* everyone asked question 1106, including university students
-* (used for the meal-frequency table, as in the BPS-style tabulation)
-generate byte pop_asked   = !missing(received)
 
 * recipients, for the tables about the meals
 generate byte rec_school = (pop_school == 1 & received == 1)
@@ -257,7 +254,7 @@ label variable mealdays "Days with MBG meals in the last week"
 
 
 *------------------------------------------------------------------------------
-* 6. School absence (1112) and meal frequency (Blok VII), for comparisons
+* 6. School absence (1112), for the comparison of recipients and non-recipients
 *------------------------------------------------------------------------------
 
 * 1112: days absent from school in the last week (not school holidays)
@@ -266,17 +263,6 @@ label variable absdays "Days absent from school (mean)"
 generate byte absent1 = (M1112 >= 1) if !missing(M1112)
 label variable absent1 "Absent at least 1 day"
 
-* Blok VII: ate often enough in the last week (1 = yes). The questions say
-* "lebih dari" (more than):
-*   702 staple food more than 13 times, or at least twice a day
-*   704 plant protein (tofu, tempe, beans) more than 3 times
-*   705 animal protein (egg, beef, chicken, fish) more than 2 times
-generate byte staple  = (M702 == 1) if !missing(M702)
-generate byte plantp  = (M704 == 1) if !missing(M704)
-generate byte animalp = (M705 == 1) if !missing(M705)
-label variable staple  "Staple food more than 13 times a week (702)"
-label variable plantp  "Plant protein more than 3 times a week (704)"
-label variable animalp "Animal protein more than 2 times a week (705)"
 
 
 *------------------------------------------------------------------------------
@@ -287,7 +273,7 @@ label variable animalp "Animal protein more than 2 times a week (705)"
 
 svyset PSU [pweight = FWT], strata(STRATA) singleunit(centered)
 
-drop M1101-M1113B M101 M105 M405 M504 M702 M704 M705
+drop M1101-M1113B M101 M105 M405 M504
 compress
 save "work/mbg_module.dta", replace
 

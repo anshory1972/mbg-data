@@ -147,7 +147,6 @@ a{color:var(--slate)}
   <div class="pages">
     <a href="files/blok_xi-13.png"><img src="files/blok_xi-13.png" alt="Kuesioner VSEN25.M halaman 13, Blok XI.A" loading="lazy"></a>
     <a href="files/blok_xi-14.png"><img src="files/blok_xi-14.png" alt="Kuesioner VSEN25.M halaman 14, Blok XI.B dan XI.C" loading="lazy"></a>
-    <a href="files/blok_vii-06.png"><img src="files/blok_vii-06.png" alt="Kuesioner VSEN25.M halaman 6, Blok VII" loading="lazy"></a>
   </div>
   <div class="links"><a href="files/VSEN25.M_MBG_questions.pdf" data-i="l_qpdf"></a></div>
 </section>
@@ -204,17 +203,17 @@ var T = {
  f_hidden: {id: "Tidak ditampilkan: kurang dari 30 responden.", en: "Not shown: fewer than 30 respondents."},
  s_q: {id: "Pertanyaan dalam kuesioner BPS (VSEN25.M)", en: "Question in the BPS questionnaire (VSEN25.M)"},
  s_pop: {id: "Kelompok", en: "Group"},
- l_qpdf: {id: "Kuesioner (PDF, 3 halaman)", en: "Questionnaire (PDF, 3 pages)"},
+ l_qpdf: {id: "Kuesioner MBG (PDF, 2 halaman)", en: "MBG questionnaire (PDF, 2 pages)"},
  l_csv: {id: "Unduh tabel ini (CSV)", en: "Download this table (CSV)"},
  l_all: {id: "Semua tabel (CSV)", en: "All tables (CSV)"},
  l_code: {id: "Kode Stata", en: "Stata code"},
  l_qsec: {id: "Lihat kuesioner", en: "See the questionnaire"},
  q_h: {id: "Kuesioner MBG", en: "The MBG questionnaire"},
- q_intro: {id: "Pertanyaan tentang MBG ada di Blok XI kuesioner VSEN25.M (Keterangan Sosial Budaya, Pendidikan, Kesejahteraan Sosial, Perumahan, dan Lingkungan Hidup). Pertanyaan ditanyakan untuk setiap anggota rumah tangga. Tabel frekuensi makan memakai Blok VII. Di bawah ini setiap pertanyaan dalam bahasa aslinya, dengan terjemahan bahasa Inggris dan tabel yang memakainya.",
-           en: "The MBG questions are in Blok XI of questionnaire VSEN25.M (social, cultural, education, welfare, housing and environment). They are asked for every household member. The meal-frequency table uses Blok VII. Below is every question in its original Indonesian, with an English translation and the tables that use it."},
+ q_intro: {id: "Pertanyaan tentang MBG ada di Blok XI kuesioner VSEN25.M (Keterangan Sosial Budaya, Pendidikan, Kesejahteraan Sosial, Perumahan, dan Lingkungan Hidup). Pertanyaan ditanyakan untuk setiap anggota rumah tangga. Di bawah ini setiap pertanyaan dalam bahasa aslinya, dengan terjemahan bahasa Inggris dan tabel yang memakainya.",
+           en: "The MBG questions are in Blok XI of questionnaire VSEN25.M (social, cultural, education, welfare, housing and environment). They are asked for every household member. Below is every question in its original Indonesian, with an English translation and the tables that use it."},
  q_pages: {id: "Halaman kuesioner", en: "Questionnaire pages"},
- q_pages_note: {id: "Ketuk gambar untuk membuka ukuran penuh. Sumber: BPS, kuesioner VSEN25.M, halaman 13, 14, dan 6.",
-                en: "Tap an image to open it at full size. Source: BPS, questionnaire VSEN25.M, pages 13, 14 and 6."},
+ q_pages_note: {id: "Ketuk gambar untuk membuka ukuran penuh. Sumber: BPS, kuesioner VSEN25.M, halaman 13 dan 14.",
+                en: "Tap an image to open it at full size. Source: BPS, questionnaire VSEN25.M, pages 13 and 14."},
  s_h: {id: "Tentang Susenas dan MBG", en: "About Susenas and MBG"},
  r_h: {id: "Cara membaca angka", en: "How to read the numbers"},
  used: {id: "Dipakai di tabel: ", en: "Used in table: "}, notused: {id: "Belum ditabelkan di halaman ini.", en: "Not yet tabulated on this page."},
@@ -244,10 +243,10 @@ var HOWTO = {
      "<dt>Sel yang tidak ditampilkan (—)</dt><dd>Sel dengan kurang dari 30 responden tidak ditampilkan, untuk menjaga kerahasiaan dan karena angkanya terlalu tidak pasti.</dd>" +
      "<dt>Kuintil pengeluaran</dt><dd>Penduduk diurutkan menurut pengeluaran per kapita rumah tangga, seperti dalam penghitungan kemiskinan BPS, lalu dibagi lima kelompok sama besar. K1 adalah 20% penduduk dengan pengeluaran terendah, K5 adalah 20% tertinggi.</dd>" +
      "<dt>Perkotaan dan perdesaan</dt><dd>Klasifikasi wilayah menurut BPS.</dd>" +
-     "<dt>Anak sekolah</dt><dd>Anak yang bersekolah di SD, SMP, atau SMA sederajat, termasuk Paket A–C, sekolah luar biasa, dan pesantren. Mahasiswa tidak dimasukkan karena tidak termasuk sasaran MBG, kecuali pada satu kelompok di tabel frekuensi makan.</dd>" +
+     "<dt>Anak sekolah</dt><dd>Anak yang bersekolah di SD, SMP, atau SMA sederajat, termasuk Paket A–C, sekolah luar biasa, dan pesantren. Mahasiswa tidak dimasukkan karena tidak termasuk sasaran MBG.</dd>" +
      "<dt>B3</dt><dd>Ibu hamil, ibu menyusui anak 0–23 bulan, dan anak balita.</dd>" +
      "<dt>Seminggu terakhir</dt><dd>Seminggu sebelum wawancara pada September 2025. Angka ini adalah jawaban rumah tangga dalam survei, bukan data administrasi Badan Gizi Nasional.</dd>" +
-     "<dt>Perbandingan, bukan dampak</dt><dd>Tabel absen sekolah dan frekuensi makan membandingkan penerima dan bukan penerima. Perbedaan dapat disebabkan oleh hal lain, misalnya wilayah atau keadaan rumah tangga. Tabel ini tidak membuktikan dampak MBG.</dd>" +
+     "<dt>Perbandingan, bukan dampak</dt><dd>Tabel absen sekolah membandingkan penerima dan bukan penerima. Perbedaan dapat disebabkan oleh hal lain, misalnya wilayah atau keadaan rumah tangga. Tabel ini tidak membuktikan dampak MBG.</dd>" +
      "<dt>Kode dan data tabel</dt><dd>Semua tabel dapat diunduh sebagai <a href='files/all_tables.csv' download>satu file CSV</a>. <a href='https://github.com/anshory1972/mbg-data/tree/main/code'>Kode Stata</a> yang menghasilkan setiap angka tersedia di GitHub.</dd>" +
      "</dl>",
  en: "<dl class='gl'>" +
@@ -258,10 +257,10 @@ var HOWTO = {
      "<dt>Cells not shown (—)</dt><dd>Cells with fewer than 30 respondents are not shown, to protect confidentiality and because the number would be too uncertain.</dd>" +
      "<dt>Expenditure quintiles</dt><dd>People are ranked by household expenditure per capita, as in the BPS poverty calculation, and divided into five groups of equal size. Q1 is the 20% of people with the lowest expenditure, Q5 the 20% with the highest.</dd>" +
      "<dt>Urban and rural</dt><dd>The BPS classification of areas.</dd>" +
-     "<dt>School children</dt><dd>Children attending primary, junior secondary or senior secondary school or the equivalent, including Paket A–C, special schools and pesantren. University students are left out because MBG does not cover them, except in one group of the meal-frequency table.</dd>" +
+     "<dt>School children</dt><dd>Children attending primary, junior secondary or senior secondary school or the equivalent, including Paket A–C, special schools and pesantren. University students are left out because MBG does not cover them.</dd>" +
      "<dt>B3</dt><dd>Pregnant women, mothers breastfeeding a child aged 0–23 months, and children under five.</dd>" +
      "<dt>The last week</dt><dd>The week before the interview in September 2025. These numbers are survey answers, not administrative data of the National Nutrition Agency (BGN).</dd>" +
-     "<dt>Comparison, not effect</dt><dd>The school-absence and meal-frequency tables compare recipients and non-recipients. Differences can come from other things, such as the area or the household's situation. These tables do not prove an effect of MBG.</dd>" +
+     "<dt>Comparison, not effect</dt><dd>The school-absence table compares recipients and non-recipients. Differences can come from other things, such as the area or the household's situation. These tables do not prove an effect of MBG.</dd>" +
      "<dt>Code and table data</dt><dd>All tables can be downloaded as <a href='files/all_tables.csv' download>one CSV file</a>. The <a href='https://github.com/anshory1972/mbg-data/tree/main/code'>Stata code</a> that produces every number is on GitHub.</dd>" +
      "</dl>"
 };
@@ -274,8 +273,7 @@ var TOPIC = {
  T5: {id: "Menu makanan", en: "Foods in the meals"},
  T6: {id: "Penilaian kualitas makanan", en: "Rated meal quality"},
  T7: {id: "Pendapat anak sekolah", en: "School children's views"},
- T8: {id: "Absen sekolah (perbandingan)", en: "School absence (comparison)"},
- T9: {id: "Frekuensi makan (perbandingan)", en: "Meal frequency (comparison)"}
+ T8: {id: "Absen sekolah (perbandingan)", en: "School absence (comparison)"}
 };
 var POP = {
  "All target groups (school children and B3)": {id: "Semua kelompok sasaran (anak sekolah dan B3)", en: "All target groups (school children and B3)"},
@@ -285,8 +283,7 @@ var POP = {
  "Pregnant women": {id: "Ibu hamil", en: "Pregnant women"},
  "Breastfeeding mothers of children 0-23 months": {id: "Ibu menyusui anak 0–23 bulan", en: "Breastfeeding mothers of children 0–23 months"},
  "School children receiving MBG": {id: "Anak sekolah penerima MBG", en: "School children receiving MBG"},
- "All people receiving MBG": {id: "Semua penerima MBG", en: "All people receiving MBG"},
- "Everyone asked about MBG (target groups, including university students)": {id: "Semua yang ditanya tentang MBG (termasuk mahasiswa)", en: "Everyone asked about MBG (including university students)"}
+ "All people receiving MBG": {id: "Semua penerima MBG", en: "All people receiving MBG"}
 };
 var MEASURE = {
  received: {id: "Menerima MBG", en: "Received MBG"},
@@ -298,8 +295,7 @@ var MEASURE = {
  hungry: {id: "Tidak lapar saat pelajaran", en: "Not hungry during lessons"},
  views2: {id: "Setuju, menurut kualitas dan menu", en: "Agrees, by quality and menu"},
  absdays: {id: "Rata-rata hari absen", en: "Average days absent"},
- absent1: {id: "Absen minimal 1 hari", en: "Absent at least 1 day"},
- foodfreq: {id: "Makan cukup sering", en: "Ate often enough"}
+ absent1: {id: "Absen minimal 1 hari", en: "Absent at least 1 day"}
 };
 // the unit of the numbers, shown in bold above each table
 var UNIT = {
@@ -333,7 +329,6 @@ var DESC = {
  views2: {id: "Persen anak penerima yang setuju atau sangat setuju.", en: "Percent of recipient children who agree or strongly agree."},
  absdays: {id: "Rata-rata hari tidak masuk sekolah dalam seminggu terakhir, bukan karena libur.", en: "Average days absent from school in the last week, not counting school holidays."},
  absent1: {id: "Persen anak yang tidak masuk sekolah minimal 1 hari dalam seminggu terakhir.", en: "Percent of children absent from school at least 1 day in the last week."},
- foodfreq: {id: "Persen orang yang makan cukup sering dalam seminggu terakhir: makanan pokok lebih dari 13 kali, protein nabati lebih dari 3 kali, protein hewani lebih dari 2 kali.", en: "Percent of people who ate often enough in the last week: staples more than 13 times, plant protein more than 3 times, animal protein more than 2 times."}
 };
 
 var BY = {
@@ -374,21 +369,18 @@ var OUT = {
  agreeA: {id: "Setuju: lebih bersemangat belajar", en: "Agrees: more eager to learn"},
  agreeB: {id: "Setuju: tidak lapar saat pelajaran", en: "Agrees: not hungry in class"},
  absdays: {id: "Rata-rata hari absen", en: "Average days absent"},
- absent1: {id: "Absen minimal 1 hari", en: "Absent at least 1 day"},
- staple: {id: "Makanan pokok (702)", en: "Staple food (702)"},
- plantp: {id: "Protein nabati (704)", en: "Plant protein (704)"},
- animalp: {id: "Protein hewani (705)", en: "Animal protein (705)"}
+ absent1: {id: "Absen minimal 1 hari", en: "Absent at least 1 day"}
 };
 var AGREE = [{id: "Tidak setuju", en: "Disagree"}, {id: "Kurang setuju", en: "Somewhat disagree"}, {id: "Setuju", en: "Agree"}, {id: "Sangat setuju", en: "Strongly agree"}];
 
 // questions: original Indonesian (q), English, and the tables that use them
 var QS = [
  ["1101", "Identifikasi perempuan pernah kawin (PPK) umur 10–54 tahun.", "Identifies ever-married women aged 10–54.", "T1, T2"],
- ["1102", "Apakah (nama) sedang hamil?", "Is (name) pregnant?", "T1, T2, T9"],
- ["1103", "Apakah (nama) memiliki anak umur 0–23 bulan dan sedang menyusui?", "Does (name) have a child aged 0–23 months and is she breastfeeding?", "T1, T2, T9"],
- ["1104", "Identifikasi anak sekolah: kode 1 jika masih bersekolah.", "Identifies school children: code 1 if still in school.", "T1, T2, T8, T9"],
- ["1105", "Identifikasi balita: kode 1 jika umur di bawah 5 tahun.", "Identifies children under five.", "T1, T2, T9"],
- ["1106", "Dalam seminggu terakhir, apakah (nama) menerima program MBG (sesuai identifikasinya)?", "In the last week, did (name) receive the MBG programme (for their target group)?", "T1, T2, T8, T9"],
+ ["1102", "Apakah (nama) sedang hamil?", "Is (name) pregnant?", "T1, T2"],
+ ["1103", "Apakah (nama) memiliki anak umur 0–23 bulan dan sedang menyusui?", "Does (name) have a child aged 0–23 months and is she breastfeeding?", "T1, T2"],
+ ["1104", "Identifikasi anak sekolah: kode 1 jika masih bersekolah.", "Identifies school children: code 1 if still in school.", "T1, T2, T8"],
+ ["1105", "Identifikasi balita: kode 1 jika umur di bawah 5 tahun.", "Identifies children under five.", "T1, T2"],
+ ["1106", "Dalam seminggu terakhir, apakah (nama) menerima program MBG (sesuai identifikasinya)?", "In the last week, did (name) receive the MBG programme (for their target group)?", "T1, T2, T8"],
  ["1107", "Pada tahun 2025, sejak bulan apa (nama) menerima program MBG?", "In 2025, since which month has (name) received the MBG programme?", "T3"],
  ["1108", "Dalam seminggu terakhir, berapa hari (nama) menerima program MBG?", "In the last week, on how many days did (name) receive the MBG programme?", "T4, T8"],
  ["1109", "Dalam seminggu terakhir, apa saja menu yang (nama) terima dari program MBG? (A. nasi, B. daging, C. ikan, D. ayam, E. telur, F. tahu/tempe, G. sayur, H. susu, I. buah, J. lainnya)", "In the last week, which foods did (name) receive from the MBG programme? (rice, meat, fish, chicken, egg, tofu/tempe, vegetables, milk, fruit, other)", "T5, T7"],
@@ -397,15 +389,12 @@ var QS = [
  ["1112", "Dalam seminggu terakhir, berapa hari (nama) absen/tidak masuk sekolah? (bukan karena hari libur sekolah)", "In the last week, on how many days was (name) absent from school? (not because of school holidays)", "T8"],
  ["1113A", "Jika menerima program MBG anak sekolah: program MBG yang diterima membuat (nama) lebih bersemangat untuk belajar? (tidak setuju, kurang setuju, setuju, sangat setuju)", "For school children receiving MBG: does the programme make (name) more eager to learn? (disagree, somewhat disagree, agree, strongly agree)", "T7"],
  ["1113B", "Program MBG yang diterima membuat (nama) merasa tidak lapar di saat jam pelajaran?", "Does the programme make (name) not feel hungry during lessons?", "T7"],
- ["1114–1118", "Biaya pendidikan pada tahun ajaran 2024/2025: sekolah negeri atau swasta, uang saku, biaya transpor, beasiswa, dan biaya sekolah per jenis.", "Education costs in the 2024/2025 school year: public or private school, pocket money, transport, scholarships and school costs by type.", ""],
- ["702", "Dalam seminggu terakhir, apakah (nama) makan makanan pokok, seperti nasi/bubur nasi, sagu, ubi, dll. lebih dari 13 kali atau minimal 2 kali dalam sehari?", "In the last week, did (name) eat staple food (rice, sago, cassava and so on) more than 13 times, or at least twice a day?", "T9"],
- ["704", "Dalam seminggu terakhir, apakah (nama) makan tahu/tempe/kacang-kacangan/lauk pauk nabati yang berprotein tinggi lainnya, lebih dari 3 kali?", "In the last week, did (name) eat tofu, tempe, beans or other high-protein plant food more than 3 times?", "T9"],
- ["705", "Dalam seminggu terakhir, apakah (nama) makan telur/daging sapi/ayam/ikan/lauk pauk yang berprotein hewani lainnya, lebih dari 2 kali?", "In the last week, did (name) eat egg, beef, chicken, fish or other animal protein more than 2 times?", "T9"]
+ ["1114–1118", "Biaya pendidikan pada tahun ajaran 2024/2025: sekolah negeri atau swasta, uang saku, biaya transpor, beasiswa, dan biaya sekolah per jenis.", "Education costs in the 2024/2025 school year: public or private school, pocket money, transport, scholarships and school costs by type.", ""]
 ];
 var QIDX = {}; QS.forEach(function (q) { QIDX[q[0]] = q; });
 
 var CSVNAME = {T1: "T1_coverage", T2: "T2_recipients", T3: "T3_start_month", T4: "T4_days", T5: "T5_foods",
-               T6: "T6_quality", T7: "T7_children_views", T8: "T8_absence", T9: "T9_meal_frequency"};
+               T6: "T6_quality", T7: "T7_children_views", T8: "T8_absence"};
 var AREAS = ["Total", "Urban", "Rural"];
 
 // ---------------------------------------------------------------- state
@@ -421,7 +410,6 @@ function group(o) {
   if (/^q\d$/.test(o)) return "quality"; if (/^a\d$/.test(o)) return "eager"; if (/^b\d$/.test(o)) return "hungry";
   if (o === "agreeA" || o === "agreeB") return "views2";
   if (o === "absdays") return "absdays"; if (o === "absent1") return "absent1";
-  if (o === "staple" || o === "plantp" || o === "animalp") return "foodfreq";
   return "received";
 }
 function outLabel(o) {

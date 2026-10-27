@@ -6,7 +6,7 @@
 * All tables are weighted with the person weight and use the survey design
 * (strata and PSU) for the confidence intervals.
 *
-* Writes: output/T1_coverage.csv ... output/T9_meal_frequency.csv
+* Writes: output/T1_coverage.csv ... output/T8_absence.csv
 *         output/all_tables.csv (all tables in one file)
 *==============================================================================
 
@@ -198,27 +198,6 @@ mbgtable absdays, table(T8) title("`ttl'") population(rec_school) ///
     by(all mealdays quintile) stat(mean) question("1112, 1108")
 
 
-*------------------------------------------------------------------------------
-* T9. Eating staples and protein often enough (Blok VII: 702, 704, 705),
-*     recipients and non-recipients. A comparison, not an effect of MBG.
-*------------------------------------------------------------------------------
-
-local ttl "Eating staple food and protein often enough in the last week"
-
-mbgtable staple plantp animalp, table(T9) title("`ttl'") population(pop_school) ///
-    poplabel("`SCHOOL'") by(all quintile) split(mbg) stat(percent) question("702, 704, 705")
-
-mbgtable staple plantp animalp, table(T9) title("`ttl'") population(pop_b3) ///
-    poplabel("`B3'") by(all quintile) split(mbg) stat(percent) question("702, 704, 705")
-
-mbgtable staple plantp animalp, table(T9) title("`ttl'") population(pop_targets) ///
-    poplabel("`ALLT'") by(all quintile) split(mbg) stat(percent) question("702, 704, 705")
-
-mbgtable staple plantp animalp, table(T9) title("`ttl'") population(pop_asked) ///
-    poplabel("Everyone asked about MBG (target groups, including university students)") ///
-    by(all quintile) split(mbg) stat(percent) question("702, 704, 705")
-
-
 postclose mbgpost
 
 
@@ -252,9 +231,8 @@ generate version = "$VERSION"
 export delimited using "output/all_tables.csv", replace datafmt
 
 local names T1 "coverage" T2 "recipients" T3 "start_month" T4 "days" ///
-            T5 "foods" T6 "quality" T7 "children_views" T8 "absence" ///
-            T9 "meal_frequency"
-forvalues i = 1/9 {
+            T5 "foods" T6 "quality" T7 "children_views" T8 "absence"
+forvalues i = 1/8 {
     local n : word `=2*`i'' of `names'
     preserve
     keep if table == "T`i'"

@@ -1,8 +1,7 @@
 # MBG tables, Susenas September 2025
 
 Tables from the MBG questions (Blok XI, questions 1101-1113) of the September
-2025 Susenas, and from the meal-frequency questions (Blok VII, 702, 704, 705),
-for a public web page on the MBG free meals programme. Only tables are
+2025 Susenas, for a public web page on the MBG free meals programme. Only tables are
 produced. No survey record leaves the computer that runs the code.
 
 Web page: https://anshory1972.github.io/mbg-data/ (beta)
@@ -37,18 +36,17 @@ Data read: `ssn202509_mod_ind.dta` (persons) and `ssn202509_kp_blok43.dta`
 | `T6_quality.csv` | Rated quality of the meals | 1110 |
 | `T7_children_views.csv` | More eager to learn; not hungry in class; share who agree by meal quality and complete menu | 1113, 1110, 1109 |
 | `T8_absence.csv` | Days absent and share absent at least one day, recipients and non-recipients | 1112, 1106, 1108 |
-| `T9_meal_frequency.csv` | Ate staple food, plant protein and animal protein often enough, recipients and non-recipients | 702, 704, 705 |
 
 Every table is given for Indonesia as a whole (`area` = Total) and for urban and
-rural areas. T8 and T9 are comparisons of recipients and non-recipients. They do
-not show an effect of MBG. `all_tables.csv` has all tables in one file.
+rural areas. T8 is a comparison of recipients and non-recipients. It does not
+show an effect of MBG. `all_tables.csv` has all tables in one file.
 
 ## Definitions
 
 - **School children:** enrolled in primary, junior secondary or senior secondary
   school, including Paket A-C, special schools and pesantren equivalents. The survey
   also marks university students as school children (1104). They are left out,
-  because MBG does not cover them, except in the T9 group "Everyone asked about MBG".
+  because MBG does not cover them.
 - **B3:** pregnant women, breastfeeding mothers of children 0-23 months, and
   children under five.
 - **Expenditure quintiles:** people are ranked by household expenditure
@@ -69,7 +67,7 @@ not show an effect of MBG. `all_tables.csv` has all tables in one file.
 | `question` | Question number(s) in questionnaire VSEN25.M |
 | `breakdown`, `category` | Rows, for example: Expenditure quintile, Q1 (poorest 20%) |
 | `area` | Total, Urban or Rural |
-| `split`, `split_category` | Columns of T8 and T9: MBG receipt (Recipients, Non-recipients, All) |
+| `split`, `split_category` | Columns of T8: MBG receipt (Recipients, Non-recipients, All) |
 | `outcome`, `outcome_label` | The answer shown, for example f_egg, Egg |
 | `statistic` | percent, mean, or total |
 | `n_persons` | People in the cell, unweighted |

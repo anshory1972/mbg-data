@@ -17,4 +17,4 @@ Only tables are published. Susenas microdata are licensed by BPS and are not in
 this repository. Cells with fewer than 30 respondents are not shown.
 
 Source: BPS, Survei Sosial Ekonomi Nasional (Susenas) September 2025. Tables
-computed by SDGs Center, Universitas Padjadjaran.
+computed at Universitas Padjadjaran.

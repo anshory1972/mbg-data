@@ -86,7 +86,7 @@ a{color:var(--slate)}
 <body>
 <main>
 <header>
-  <div class="brand">SDGs Center, Universitas Padjadjaran<span class="beta">BETA</span></div>
+  <div class="brand">Universitas Padjadjaran<span class="beta">BETA</span></div>
   <div class="lang" role="group" aria-label="Language">
     <button type="button" data-lang="id" aria-pressed="true">ID</button>
     <button type="button" data-lang="en" aria-pressed="false">EN</button>
@@ -109,6 +109,7 @@ a{color:var(--slate)}
     <label class="ctl"><span data-i="c_pop"></span><select id="sPop"></select></label>
     <label class="ctl" id="wMeasure"><span data-i="c_measure"></span><select id="sMeasure"></select></label>
     <label class="ctl" id="wBy"><span data-i="c_by"></span><select id="sBy"></select></label>
+    <label class="ctl hidden" id="wOut"><span data-i="c_out"></span><select id="sOut"></select></label>
   </div>
   <div class="row2">
     <div><span class="ctlh" data-i="c_show"></span><div class="seg" id="gShow"></div></div>
@@ -167,7 +168,8 @@ var T = {
  n_s: {id: "Tentang Susenas", en: "About Susenas"}, n_r: {id: "Cara membaca angka", en: "How to read the numbers"},
  c_topic: {id: "Topik", en: "Topic"}, c_pop: {id: "Kelompok", en: "Group"},
  c_measure: {id: "Ukuran", en: "Measure"}, c_by: {id: "Rincian menurut", en: "Breakdown"},
- c_show: {id: "Tampilkan", en: "Show"}, c_area: {id: "Wilayah", en: "Area"},
+ na: {id: "tidak ada", en: "none"},
+ c_show: {id: "Tampilkan", en: "Show"}, c_area: {id: "Wilayah", en: "Area"}, c_out: {id: "Jawaban", en: "Answer"},
  show_est: {id: "Persen / nilai", en: "Percent / value"},
  show_w: {id: "Jumlah tertimbang", en: "Weighted number"},
  show_n: {id: "Jumlah responden", en: "Respondents"},
@@ -207,8 +209,8 @@ var T = {
  r_h: {id: "Cara membaca angka", en: "How to read the numbers"},
  used: {id: "Dipakai di tabel: ", en: "Used in table: "}, notused: {id: "Belum ditabelkan di halaman ini.", en: "Not yet tabulated on this page."},
  total: {id: "Total", en: "Total"}, Urban: {id: "Perkotaan", en: "Urban"}, Rural: {id: "Perdesaan", en: "Rural"},
- foot: {id: "Sumber data: BPS, Survei Sosial Ekonomi Nasional (Susenas) September 2025. Tabel dihitung oleh SDGs Center, Universitas Padjadjaran. Versi beta, tabel dibuat ",
-        en: "Data source: BPS, National Socio-Economic Survey (Susenas) September 2025. Tables computed by SDGs Center, Universitas Padjadjaran. Beta version, tables made "}
+ foot: {id: "Sumber data: BPS, Survei Sosial Ekonomi Nasional (Susenas) September 2025. Tabel dihitung di Universitas Padjadjaran. Versi beta, tabel dibuat ",
+        en: "Data source: BPS, National Socio-Economic Survey (Susenas) September 2025. Tables computed at Universitas Padjadjaran. Beta version, tables made "}
 };
 
 var ABOUT = {
@@ -237,7 +239,7 @@ var HOWTO = {
      "<dt>Seminggu terakhir</dt><dd>Seminggu sebelum wawancara pada September 2025. Angka ini adalah jawaban rumah tangga dalam survei, bukan data administrasi Badan Gizi Nasional.</dd>" +
      "<dt>Perbandingan, bukan dampak</dt><dd>Tabel absen sekolah dan frekuensi makan membandingkan penerima dan bukan penerima. Perbedaan dapat disebabkan oleh hal lain, misalnya wilayah atau keadaan rumah tangga. Tabel ini tidak membuktikan dampak MBG.</dd>" +
      "<dt>Nilai MBG menurut tarif</dt><dd>Survei tidak menanyakan nilai rupiah makanan MBG. Nilai dihitung dari jumlah hari menerima dan tarif per porsi program (Rp8.000 atau Rp10.000), lalu dibandingkan dengan pengeluaran rumah tangga. Angka ini dihitung per rumah tangga dengan penimbang rumah tangga.</dd>" +
-     "<dt>Kode dan data tabel</dt><dd>Semua tabel dapat diunduh sebagai CSV. Kode Stata yang menghasilkan setiap angka tersedia di GitHub.</dd>" +
+     "<dt>Kode dan data tabel</dt><dd>Semua tabel dapat diunduh sebagai <a href='files/all_tables.csv' download>satu file CSV</a>. <a href='https://github.com/anshory1972/mbg-data/tree/main/code'>Kode Stata</a> yang menghasilkan setiap angka tersedia di GitHub.</dd>" +
      "</dl>",
  en: "<dl class='gl'>" +
      "<dt>Weighted</dt><dd>All numbers use the BPS person weight. Percentages and numbers of people are estimates for the whole population of Indonesia, not only for the people interviewed.</dd>" +
@@ -252,7 +254,7 @@ var HOWTO = {
      "<dt>The last week</dt><dd>The week before the interview in September 2025. These numbers are survey answers, not administrative data of the National Nutrition Agency (BGN).</dd>" +
      "<dt>Comparison, not effect</dt><dd>The school-absence and meal-frequency tables compare recipients and non-recipients. Differences can come from other things, such as the area or the household's situation. These tables do not prove an effect of MBG.</dd>" +
      "<dt>Value of MBG at programme cost</dt><dd>The survey does not ask for the rupiah value of the meals. The value is computed from the days with meals and the programme cost per portion (Rp8,000 or Rp10,000), then compared with household spending. These numbers are per household, with the household weight.</dd>" +
-     "<dt>Code and table data</dt><dd>All tables can be downloaded as CSV. The Stata code that produces every number is on GitHub.</dd>" +
+     "<dt>Code and table data</dt><dd>All tables can be downloaded as <a href='files/all_tables.csv' download>one CSV file</a>. The <a href='https://github.com/anshory1972/mbg-data/tree/main/code'>Stata code</a> that produces every number is on GitHub.</dd>" +
      "</dl>"
 };
 
@@ -374,7 +376,7 @@ var CSVNAME = {T1: "T1_coverage", T2: "T2_recipients", T3: "T3_start_month", T4:
 var AREAS = ["Total", "Urban", "Rural"];
 
 // ---------------------------------------------------------------- state
-var S = {lang: "id", table: "T1", pop: null, measure: null, by: null, area: "Total", show: "est", sel: null};
+var S = {lang: "id", table: "T1", pop: null, measure: null, by: null, out: null, area: "Total", show: "est", sel: null};
 var R = [], META = {};
 
 function t(k) { var o = T[k]; return o ? o[S.lang] : k; }
@@ -431,7 +433,6 @@ function sync() {
   bys.sort(function (a, b) { return BYORDER.indexOf(a) - BYORDER.indexOf(b); });
   if (bys.indexOf(S.by) < 0) S.by = bys[0];
   fillSelect(sBy, bys, function (v) { return tr(BY, v); }, S.by);
-  wBy.classList.toggle("hidden", bys.length < 2);
 }
 
 // ---------------------------------------------------------------- table
@@ -460,6 +461,15 @@ function render() {
   sync();
   var rows = rowsFor(S.table, S.pop, S.measure, S.by);
   var hasSplit = rows.some(function (r) { return r.split_category; });
+  // with a split (recipients / non-recipients) and several rows, show one answer at a time
+  var outsAll = uniq(rows.map(function (r) { return r.outcome; }));
+  var needOut = hasSplit && uniq(rows.map(function (r) { return r.category; })).length > 1 && outsAll.length > 1;
+  wOut.classList.toggle("hidden", !needOut);
+  if (needOut) {
+    if (outsAll.indexOf(S.out) < 0) S.out = outsAll[0];
+    fillSelect(sOut, outsAll, outLabel, S.out);
+    rows = rows.filter(function (r) { return r.outcome === S.out; });
+  }
   var cats = uniq(rows.map(function (r) { return r.category; }));
   var outs = uniq(rows.map(function (r) { return r.outcome; }));
   var mode, rowKeys, colKeys;
@@ -495,7 +505,7 @@ function render() {
     h += '<tr><th scope="row" class="rh">' + esc(rowLabel(rk)) + "</th>";
     colKeys.forEach(function (ck) {
       var r = find(rk, ck);
-      if (!r) { h += "<td></td>"; return; }
+      if (!r) { h += '<td style="color:var(--muted);font-size:12px">' + t("na") + "</td>"; return; }
       var c = cellValue(r), id = R.indexOf(r);
       var bar = (S.show === "est" && r.statistic === "percent" && r.estimate !== null && r.flag !== "hidden")
         ? '<span class="bar" style="width:' + Math.min(100, Math.max(0, r.estimate)).toFixed(1) + '%"></span>' : "";
@@ -563,9 +573,7 @@ function renderSource(r) {
   });
   h += '<p class="qe">' + t("s_pop") + ": " + esc(tr(POP, S.pop)) + "</p>";
   h += '<div class="links"><a href="#kuesioner">' + t("l_qsec") + "</a>" +
-       '<a href="files/' + CSVNAME[S.table] + '.csv" download>' + t("l_csv") + "</a>" +
-       '<a href="files/all_tables.csv" download>' + t("l_all") + "</a>" +
-       '<a href="https://github.com/anshory1972/mbg-data/tree/main/code">' + t("l_code") + "</a></div>";
+       '<a href="files/' + CSVNAME[S.table] + '.csv" download>' + t("l_csv") + "</a></div>";
   src.innerHTML = h;
 }
 function renderQuestions() {
@@ -586,8 +594,8 @@ function renderStatic() {
 
 // ---------------------------------------------------------------- events
 function $(id) { return document.getElementById(id); }
-var sTable = $("sTable"), sPop = $("sPop"), sMeasure = $("sMeasure"), sBy = $("sBy"),
-    wMeasure = $("wMeasure"), wBy = $("wBy"), wArea = $("wArea"), gShow = $("gShow"), gArea = $("gArea"),
+var sTable = $("sTable"), sPop = $("sPop"), sMeasure = $("sMeasure"), sBy = $("sBy"), sOut = $("sOut"),
+    wMeasure = $("wMeasure"), wBy = $("wBy"), wOut = $("wOut"), wArea = $("wArea"), gShow = $("gShow"), gArea = $("gArea"),
     tbl = $("tbl"), tblttl = $("tblttl"), tblsub = $("tblsub"), cmpnote = $("cmpnote"), valnote = $("valnote"),
     detail = $("detail"), src = $("src"), about = $("about"), howto = $("howto"), qlist = $("qlist"), foot = $("foot");
 
@@ -595,6 +603,7 @@ sTable.addEventListener("change", function () { S.table = sTable.value; S.sel = 
 sPop.addEventListener("change", function () { S.pop = sPop.value; S.sel = null; render(); });
 sMeasure.addEventListener("change", function () { S.measure = sMeasure.value; S.sel = null; render(); });
 sBy.addEventListener("change", function () { S.by = sBy.value; S.sel = null; render(); });
+sOut.addEventListener("change", function () { S.out = sOut.value; S.sel = null; render(); });
 gShow.addEventListener("click", function (e) { var b = e.target.closest("button"); if (b) { S.show = b.getAttribute("data-show"); render(); } });
 gArea.addEventListener("click", function (e) { var b = e.target.closest("button"); if (b) { S.area = b.getAttribute("data-area"); S.sel = null; render(); } });
 function pick(e) { var td = e.target.closest("td.c"); if (td) { S.sel = +td.getAttribute("data-id"); render(); } }

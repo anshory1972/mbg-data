@@ -53,11 +53,11 @@ mbgtable received, table(T1) title("`ttl'") population(pop_under5) poplabel("Chi
     by(all quintile) stat(percent) question("1105, 1106")
 
 mbgtable received, table(T1) title("`ttl'") population(pop_pregnant) poplabel("Pregnant women") ///
-    by(all) stat(percent) question("1102, 1106")
+    by(all quintile) stat(percent) question("1102, 1106")
 
 mbgtable received, table(T1) title("`ttl'") population(pop_breastf) ///
     poplabel("Breastfeeding mothers of children 0-23 months") ///
-    by(all) stat(percent) question("1103, 1106")
+    by(all quintile) stat(percent) question("1103, 1106")
 
 
 *------------------------------------------------------------------------------
@@ -68,23 +68,23 @@ mbgtable received, table(T1) title("`ttl'") population(pop_breastf) ///
 local ttl "Number of people receiving MBG in the last week"
 
 mbgtable received, table(T2) title("`ttl'") population(pop_targets) poplabel("`ALLT'") ///
-    by(all) stat(total) question("1102-1106")
+    by(all quintile) stat(total) question("1102-1106")
 
 mbgtable received, table(T2) title("`ttl'") population(pop_school) poplabel("`SCHOOL'") ///
-    by(all province) stat(total) question("1104, 1106")
+    by(all quintile province) stat(total) question("1104, 1106")
 
 mbgtable received, table(T2) title("`ttl'") population(pop_b3) poplabel("`B3'") ///
-    by(all) stat(total) question("1102, 1103, 1105, 1106")
+    by(all quintile) stat(total) question("1102, 1103, 1105, 1106")
 
 mbgtable received, table(T2) title("`ttl'") population(pop_under5) poplabel("Children under five") ///
-    by(all) stat(total) question("1105, 1106")
+    by(all quintile) stat(total) question("1105, 1106")
 
 mbgtable received, table(T2) title("`ttl'") population(pop_pregnant) poplabel("Pregnant women") ///
-    by(all) stat(total) question("1102, 1106")
+    by(all quintile) stat(total) question("1102, 1106")
 
 mbgtable received, table(T2) title("`ttl'") population(pop_breastf) ///
     poplabel("Breastfeeding mothers of children 0-23 months") ///
-    by(all) stat(total) question("1103, 1106")
+    by(all quintile) stat(total) question("1103, 1106")
 
 
 *------------------------------------------------------------------------------
@@ -104,7 +104,7 @@ mbgtable mg1-mg4, table(T3) title("`ttl'") population(rec_school) ///
 
 mbgtable m01-m09, table(T3) title("`ttl'") population(rec_all) ///
     poplabel("All people receiving MBG") ///
-    by(all) stat(percent) question("1107")
+    by(all quintile) stat(percent) question("1107")
 
 
 *------------------------------------------------------------------------------
@@ -123,7 +123,7 @@ mbgtable d1-d6, table(T4) title("`ttl'") population(rec_school) ///
 
 mbgtable days, table(T4) title("`ttl'") population(rec_all) ///
     poplabel("All people receiving MBG") ///
-    by(all) stat(mean) question("1108")
+    by(all quintile) stat(mean) question("1108")
 
 
 *------------------------------------------------------------------------------
@@ -143,7 +143,7 @@ mbgtable nfoods, table(T5) title("`ttl'") population(rec_school) ///
 
 mbgtable `foods', table(T5) title("`ttl'") population(rec_all) ///
     poplabel("All people receiving MBG") ///
-    by(all) stat(percent) question("1109")
+    by(all quintile) stat(percent) question("1109")
 
 
 *------------------------------------------------------------------------------
@@ -158,7 +158,7 @@ mbgtable q1-q4, table(T6) title("`ttl'") population(rec_school) ///
 
 mbgtable q1-q4, table(T6) title("`ttl'") population(rec_all) ///
     poplabel("All people receiving MBG") ///
-    by(all) stat(percent) question("1110")
+    by(all quintile) stat(percent) question("1110")
 
 
 *------------------------------------------------------------------------------
@@ -176,7 +176,7 @@ mbgtable b1-b4, table(T7) title("Children's views: with MBG I am not hungry in c
 * share who agree (agree or strongly agree), by meal quality and complete menu
 mbgtable agreeA agreeB, table(T7) title("Children's views by meal quality and menu") ///
     population(rec_school) poplabel("School children receiving MBG") ///
-    by(all quality complete) stat(percent) question("1113, 1110, 1109")
+    by(all quintile quality complete) stat(percent) question("1113, 1110, 1109")
 
 
 *------------------------------------------------------------------------------
@@ -195,7 +195,7 @@ mbgtable absent1, table(T8) title("`ttl'") population(pop_school) poplabel("`SCH
 * recipients only, by days with MBG meals
 mbgtable absdays, table(T8) title("`ttl'") population(rec_school) ///
     poplabel("School children receiving MBG") ///
-    by(mealdays) stat(mean) question("1112, 1108")
+    by(mealdays quintile) stat(mean) question("1112, 1108")
 
 
 *------------------------------------------------------------------------------
@@ -206,17 +206,17 @@ mbgtable absdays, table(T8) title("`ttl'") population(rec_school) ///
 local ttl "Eating staple food and protein often enough in the last week"
 
 mbgtable staple plantp animalp, table(T9) title("`ttl'") population(pop_school) ///
-    poplabel("`SCHOOL'") by(all) split(mbg) stat(percent) question("702, 704, 705")
+    poplabel("`SCHOOL'") by(all decile quintile) split(mbg) stat(percent) question("702, 704, 705")
 
 mbgtable staple plantp animalp, table(T9) title("`ttl'") population(pop_b3) ///
-    poplabel("`B3'") by(all) split(mbg) stat(percent) question("702, 704, 705")
+    poplabel("`B3'") by(all decile quintile) split(mbg) stat(percent) question("702, 704, 705")
 
 mbgtable staple plantp animalp, table(T9) title("`ttl'") population(pop_targets) ///
-    poplabel("`ALLT'") by(all) split(mbg) stat(percent) question("702, 704, 705")
+    poplabel("`ALLT'") by(all decile quintile) split(mbg) stat(percent) question("702, 704, 705")
 
 mbgtable staple plantp animalp, table(T9) title("`ttl'") population(pop_asked) ///
     poplabel("Everyone asked about MBG (target groups, including university students)") ///
-    by(all) split(mbg) stat(percent) question("702, 704, 705")
+    by(all decile quintile) split(mbg) stat(percent) question("702, 704, 705")
 
 
 *------------------------------------------------------------------------------
@@ -264,7 +264,7 @@ format estimate ci_low ci_high %15.10g
 format weighted_persons weighted_yes n_* %15.0f
 format rse_pct %8.4g
 
-generate source = "BPS, Susenas September 2025, questionnaire VSEN25.M. Weighted. Computed by SDGs Center, Universitas Padjadjaran."
+generate source = "BPS, Susenas September 2025, questionnaire VSEN25.M. Weighted. Computed at Universitas Padjadjaran."
 generate version = "$VERSION"
 
 export delimited using "output/all_tables.csv", replace datafmt

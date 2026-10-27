@@ -36,13 +36,8 @@
 *   poplabel    description of those people
 *   by          breakdown variables (rows), for example: all quintile province
 *   split       optional second breakdown (columns), for example: mbg
-*   stat        percent (0/1 answers), mean, total (weighted number of 1s),
-*               or ratio (two variables: numerator denominator; the estimate
-*               is 100 x weighted sum of the first / weighted sum of the second)
+*   stat        percent (0/1 answers), mean, or total (weighted number of 1s)
 *   question    question number(s) in the questionnaire VSEN25.M
-*   weight      optional weight variable for the counts (default FWT, the
-*               person weight). Use WERT for household tables; the counts
-*               are then households (column unit = households).
 *
 * The results file must be open as postfile -mbgpost- (02_tables.do does this).
 *==============================================================================
@@ -51,18 +46,7 @@ capture program drop mbgtable
 program define mbgtable
     syntax varlist, TABle(string) TITle(string) POPulation(varname) ///
         POPLabel(string) BY(varlist) STAT(string) QUEStion(string) ///
-        [SPLit(varname) WEIGHT(varname)]
-
-    if "`weight'" == "" local weight FWT
-    local unit = cond("`weight'" == "FWT", "persons", "households")
-
-    * the answer variables reported: for a ratio, only the numerator
-    local ylist `varlist'
-    if "`stat'" == "ratio" {
-        local num : word 1 of `varlist'
-        local den : word 2 of `varlist'
-        local ylist `num'
-    }
+        [SPLit(varname)]
 
     * the three areas: whole country, urban, rural
     local area_names `" "Total" "Urban" "Rural" "'
@@ -115,15 +99,12 @@ program define mbgtable
                     quietly count if `hh' == 1
                     local n_households = r(N)
 
-                    quietly summarize `weight' if `cell'
+                    quietly summarize FWT if `cell'
                     local w_persons = r(sum)
 
                     * survey estimates for all answer variables at once
                     if "`stat'" == "total" {
                         capture quietly svy, subpop(`cell'): total `varlist'
-                    }
-                    else if "`stat'" == "ratio" {
-                        capture quietly svy, subpop(`cell'): ratio (`num': `num'/`den')
                     }
                     else {
                         capture quietly svy, subpop(`cell'): mean `varlist'
@@ -132,7 +113,7 @@ program define mbgtable
                     local df = cond(`svy_ok', e(df_r), .)
                     local t = invttail(`df', 0.025)
 
-                    foreach y of local ylist {
+                    foreach y of local varlist {
                         local ylabel : variable label `y'
 
                         quietly count if `cell' & !missing(`y')
@@ -143,7 +124,7 @@ program define mbgtable
                         if inlist("`stat'", "percent", "total") {
                             quietly count if `cell' & `y' == 1
                             local n_yes = r(N)
-                            quietly summarize `weight' if `cell' & `y' == 1
+                            quietly summarize FWT if `cell' & `y' == 1
                             local w_yes = r(sum)
                         }
 
@@ -164,11 +145,6 @@ program define mbgtable
                                     local hi = 100 * invlogit(logit(`b_') + `t' * `sl')
                                 }
                                 local est = 100 * `b_'
-                            }
-                            else if "`stat'" == "ratio" {
-                                local est = 100 * `b_'
-                                local lo  = 100 * (`b_' - `t' * `se')
-                                local hi  = 100 * (`b_' + `t' * `se')
                             }
                             else {
                                 local est = `b_'
@@ -199,7 +175,7 @@ program define mbgtable
                             ("`y'") ("`ylabel'") ("`stat'") ///
                             (`n_persons') (`n_answered') (`n_households') (`n_yes') ///
                             (`w_persons') (`w_yes') (`est') (`lo') (`hi') (`rse') ///
-                            ("`flag'") ("`unit'")
+                            ("`flag'")
                     }
                     drop `cell' `hh'
                 }

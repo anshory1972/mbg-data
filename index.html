@@ -132,7 +132,6 @@ a{color:var(--slate)}
   <p class="unitline" id="unitline"></p>
   <p class="sub" id="tblsub"></p>
   <p class="cmp hidden" id="cmpnote" data-i="cmp"></p>
-  <p class="cmp hidden" id="valnote" data-i="valnote"></p>
   <p class="swipe hidden" id="swipe" data-i="swipe"></p>
   <div class="tw" id="tw"><table id="tbl"></table></div>
   <p class="legend" data-i="legend"></p>
@@ -191,10 +190,6 @@ var T = {
  show_n: {id: "Jumlah responden", en: "Respondents"},
  cmp: {id: "Perbandingan penerima dan bukan penerima menunjukkan perbedaan, bukan bukti bahwa MBG menjadi penyebabnya.",
        en: "Comparing recipients and non-recipients shows differences, not proof that MBG caused them."},
- valnote: {id: "Nilai MBG dihitung dengan tarif per porsi: Rp8.000 untuk balita dan siswa SD kelas 1–3, Rp10.000 untuk ibu hamil, ibu menyusui, siswa SD kelas 4–6, SMP, dan SMA. Nilai sebulan = hari menerima dalam seminggu × tarif × 4,33 minggu. Hanya rumah tangga yang memiliki penerima MBG. Kuintil dihitung dari seluruh rumah tangga.",
-           en: "The value of MBG uses the cost per portion: Rp8,000 for children under five and primary grades 1–3, Rp10,000 for pregnant and breastfeeding women, primary grades 4–6, junior and senior secondary. Monthly value = days with meals in the week × cost × 4.33 weeks. Households with MBG recipients only. Quintiles are computed from all households."},
- d_np_h: {id: "Rumah tangga dalam sel (sampel)", en: "Households in the cell (sample)"},
- d_wp_h: {id: "Rumah tangga dalam sel (tertimbang)", en: "Households in the cell (weighted)"},
  legend: {id: "Ketuk angka untuk melihat rinciannya. Angka kecil di bawah: selang kepercayaan 95%. * kurang teliti (galat baku relatif di atas 25%). ** tidak andal (di atas 50%). — tidak ditampilkan (kurang dari 30 responden).",
           en: "Tap a number to see its details. Small numbers below: 95% confidence interval. * less precise (relative standard error above 25%). ** not reliable (above 50%). — not shown (fewer than 30 respondents)."},
  d_est: {id: "Perkiraan", en: "Estimate"}, d_ci: {id: "Selang kepercayaan 95%", en: "95% confidence interval"},
@@ -254,7 +249,6 @@ var HOWTO = {
      "<dt>B3</dt><dd>Ibu hamil, ibu menyusui anak 0–23 bulan, dan anak balita.</dd>" +
      "<dt>Seminggu terakhir</dt><dd>Seminggu sebelum wawancara pada September 2025. Angka ini adalah jawaban rumah tangga dalam survei, bukan data administrasi Badan Gizi Nasional.</dd>" +
      "<dt>Perbandingan, bukan dampak</dt><dd>Tabel absen sekolah dan frekuensi makan membandingkan penerima dan bukan penerima. Perbedaan dapat disebabkan oleh hal lain, misalnya wilayah atau keadaan rumah tangga. Tabel ini tidak membuktikan dampak MBG.</dd>" +
-     "<dt>Nilai MBG menurut tarif</dt><dd>Survei tidak menanyakan nilai rupiah makanan MBG. Nilai dihitung dari jumlah hari menerima dan tarif per porsi program (Rp8.000 atau Rp10.000), lalu dibandingkan dengan pengeluaran rumah tangga. Angka ini dihitung per rumah tangga dengan penimbang rumah tangga.</dd>" +
      "<dt>Kode dan data tabel</dt><dd>Semua tabel dapat diunduh sebagai <a href='files/all_tables.csv' download>satu file CSV</a>. <a href='https://github.com/anshory1972/mbg-data/tree/main/code'>Kode Stata</a> yang menghasilkan setiap angka tersedia di GitHub.</dd>" +
      "</dl>",
  en: "<dl class='gl'>" +
@@ -269,7 +263,6 @@ var HOWTO = {
      "<dt>B3</dt><dd>Pregnant women, mothers breastfeeding a child aged 0–23 months, and children under five.</dd>" +
      "<dt>The last week</dt><dd>The week before the interview in September 2025. These numbers are survey answers, not administrative data of the National Nutrition Agency (BGN).</dd>" +
      "<dt>Comparison, not effect</dt><dd>The school-absence and meal-frequency tables compare recipients and non-recipients. Differences can come from other things, such as the area or the household's situation. These tables do not prove an effect of MBG.</dd>" +
-     "<dt>Value of MBG at programme cost</dt><dd>The survey does not ask for the rupiah value of the meals. The value is computed from the days with meals and the programme cost per portion (Rp8,000 or Rp10,000), then compared with household spending. These numbers are per household, with the household weight.</dd>" +
      "<dt>Code and table data</dt><dd>All tables can be downloaded as <a href='files/all_tables.csv' download>one CSV file</a>. The <a href='https://github.com/anshory1972/mbg-data/tree/main/code'>Stata code</a> that produces every number is on GitHub.</dd>" +
      "</dl>"
 };
@@ -283,8 +276,7 @@ var TOPIC = {
  T6: {id: "Penilaian kualitas makanan", en: "Rated meal quality"},
  T7: {id: "Pendapat anak sekolah", en: "School children's views"},
  T8: {id: "Absen sekolah (perbandingan)", en: "School absence (comparison)"},
- T9: {id: "Frekuensi makan (perbandingan)", en: "Meal frequency (comparison)"},
- T10: {id: "Nilai MBG menurut tarif", en: "Value of MBG at programme cost"}
+ T9: {id: "Frekuensi makan (perbandingan)", en: "Meal frequency (comparison)"}
 };
 var POP = {
  "All target groups (school children and B3)": {id: "Semua kelompok sasaran (anak sekolah dan B3)", en: "All target groups (school children and B3)"},
@@ -295,8 +287,7 @@ var POP = {
  "Breastfeeding mothers of children 0-23 months": {id: "Ibu menyusui anak 0–23 bulan", en: "Breastfeeding mothers of children 0–23 months"},
  "School children receiving MBG": {id: "Anak sekolah penerima MBG", en: "School children receiving MBG"},
  "All people receiving MBG": {id: "Semua penerima MBG", en: "All people receiving MBG"},
- "Everyone asked about MBG (target groups, including university students)": {id: "Semua yang ditanya tentang MBG (termasuk mahasiswa)", en: "Everyone asked about MBG (including university students)"},
- "Households with MBG recipients": {id: "Rumah tangga penerima MBG", en: "Households with MBG recipients"}
+ "Everyone asked about MBG (target groups, including university students)": {id: "Semua yang ditanya tentang MBG (termasuk mahasiswa)", en: "Everyone asked about MBG (including university students)"}
 };
 var MEASURE = {
  received: {id: "Menerima MBG", en: "Received MBG"},
@@ -309,10 +300,7 @@ var MEASURE = {
  views2: {id: "Setuju, menurut kualitas dan menu", en: "Agrees, by quality and menu"},
  absdays: {id: "Rata-rata hari absen", en: "Average days absent"},
  absent1: {id: "Absen minimal 1 hari", en: "Absent at least 1 day"},
- foodfreq: {id: "Makan cukup sering", en: "Ate often enough"},
- valshare: {id: "Persen dari pengeluaran rumah tangga", en: "Percent of household spending"},
- value: {id: "Nilai per rumah tangga per bulan (Rp)", en: "Value per household per month (Rp)"},
- nrec: {id: "Penerima per rumah tangga", en: "Recipients per household"}
+ foodfreq: {id: "Makan cukup sering", en: "Ate often enough"}
 };
 // the unit of the numbers, shown in bold above each table
 var UNIT = {
@@ -321,18 +309,12 @@ var UNIT = {
  days16: {id: "hari (rata-rata, 1–6)", en: "days (average, 1–6)"},
  days06: {id: "hari (rata-rata, 0–6)", en: "days (average, 0–6)"},
  foods9: {id: "jumlah jenis makanan (rata-rata, 0–9)", en: "number of foods (average, 0–9)"},
- pctspend: {id: "persen (%) dari pengeluaran rumah tangga", en: "percent (%) of household spending"},
- rupiah: {id: "rupiah per rumah tangga per bulan", en: "rupiah per household per month"},
- perhh: {id: "orang per rumah tangga (rata-rata)", en: "people per household (average)"},
  wpeople: {id: "jumlah orang, perkiraan untuk seluruh Indonesia (tertimbang)", en: "number of people, estimate for all of Indonesia (weighted)"},
- whh: {id: "jumlah rumah tangga, perkiraan untuk seluruh Indonesia (tertimbang)", en: "number of households, estimate for all of Indonesia (weighted)"},
  npeople: {id: "jumlah responden (orang yang diwawancarai)", en: "number of respondents (people interviewed)"},
- nhh: {id: "jumlah rumah tangga dalam sampel", en: "number of households in the sample"}
 };
 function unitKey(m, stat) {
   if (m === "received") return stat === "total" ? "people" : "pct";
   if (m === "days") return "days16"; if (m === "absdays") return "days06"; if (m === "nfoods") return "foods9";
-  if (m === "valshare") return "pctspend"; if (m === "value") return "rupiah"; if (m === "nrec") return "perhh";
   return "pct";
 }
 
@@ -352,10 +334,7 @@ var DESC = {
  views2: {id: "Persen anak penerima yang setuju atau sangat setuju.", en: "Percent of recipient children who agree or strongly agree."},
  absdays: {id: "Rata-rata hari tidak masuk sekolah dalam seminggu terakhir, bukan karena libur.", en: "Average days absent from school in the last week, not counting school holidays."},
  absent1: {id: "Persen anak yang tidak masuk sekolah minimal 1 hari dalam seminggu terakhir.", en: "Percent of children absent from school at least 1 day in the last week."},
- foodfreq: {id: "Persen orang yang makan cukup sering dalam seminggu terakhir: makanan pokok lebih dari 13 kali, protein nabati lebih dari 3 kali, protein hewani lebih dari 2 kali.", en: "Percent of people who ate often enough in the last week: staples more than 13 times, plant protein more than 3 times, animal protein more than 2 times."},
- valshare: {id: "Nilai MBG menurut tarif, sebagai persen pengeluaran rumah tangga per bulan.", en: "Value of MBG at programme cost, as a percent of monthly household spending."},
- value: {id: "Rata-rata nilai MBG menurut tarif per rumah tangga per bulan, dalam rupiah.", en: "Average value of MBG at programme cost per household per month, in rupiah."},
- nrec: {id: "Rata-rata jumlah penerima MBG per rumah tangga.", en: "Average number of MBG recipients per household."}
+ foodfreq: {id: "Persen orang yang makan cukup sering dalam seminggu terakhir: makanan pokok lebih dari 13 kali, protein nabati lebih dari 3 kali, protein hewani lebih dari 2 kali.", en: "Percent of people who ate often enough in the last week: staples more than 13 times, plant protein more than 3 times, animal protein more than 2 times."}
 };
 
 var BY = {
@@ -399,10 +378,7 @@ var OUT = {
  absent1: {id: "Absen minimal 1 hari", en: "Absent at least 1 day"},
  staple: {id: "Makanan pokok (702)", en: "Staple food (702)"},
  plantp: {id: "Protein nabati (704)", en: "Plant protein (704)"},
- animalp: {id: "Protein hewani (705)", en: "Animal protein (705)"},
- valshare: {id: "Nilai MBG, % pengeluaran rumah tangga", en: "MBG value, % of household spending"},
- mbgvalue: {id: "Nilai MBG per bulan (Rp)", en: "MBG value per month (Rp)"},
- nrec: {id: "Rata-rata penerima per rumah tangga", en: "Average recipients per household"}
+ animalp: {id: "Protein hewani (705)", en: "Animal protein (705)"}
 };
 var AGREE = [{id: "Tidak setuju", en: "Disagree"}, {id: "Kurang setuju", en: "Somewhat disagree"}, {id: "Setuju", en: "Agree"}, {id: "Sangat setuju", en: "Strongly agree"}];
 
@@ -413,9 +389,9 @@ var QS = [
  ["1103", "Apakah (nama) memiliki anak umur 0–23 bulan dan sedang menyusui?", "Does (name) have a child aged 0–23 months and is she breastfeeding?", "T1, T2, T9"],
  ["1104", "Identifikasi anak sekolah: kode 1 jika masih bersekolah.", "Identifies school children: code 1 if still in school.", "T1, T2, T8, T9"],
  ["1105", "Identifikasi balita: kode 1 jika umur di bawah 5 tahun.", "Identifies children under five.", "T1, T2, T9"],
- ["1106", "Dalam seminggu terakhir, apakah (nama) menerima program MBG (sesuai identifikasinya)?", "In the last week, did (name) receive the MBG programme (for their target group)?", "T1, T2, T8, T9, T10"],
+ ["1106", "Dalam seminggu terakhir, apakah (nama) menerima program MBG (sesuai identifikasinya)?", "In the last week, did (name) receive the MBG programme (for their target group)?", "T1, T2, T8, T9"],
  ["1107", "Pada tahun 2025, sejak bulan apa (nama) menerima program MBG?", "In 2025, since which month has (name) received the MBG programme?", "T3"],
- ["1108", "Dalam seminggu terakhir, berapa hari (nama) menerima program MBG?", "In the last week, on how many days did (name) receive the MBG programme?", "T4, T8, T10"],
+ ["1108", "Dalam seminggu terakhir, berapa hari (nama) menerima program MBG?", "In the last week, on how many days did (name) receive the MBG programme?", "T4, T8"],
  ["1109", "Dalam seminggu terakhir, apa saja menu yang (nama) terima dari program MBG? (A. nasi, B. daging, C. ikan, D. ayam, E. telur, F. tahu/tempe, G. sayur, H. susu, I. buah, J. lainnya)", "In the last week, which foods did (name) receive from the MBG programme? (rice, meat, fish, chicken, egg, tofu/tempe, vegetables, milk, fruit, other)", "T5, T7"],
  ["1110", "Dalam seminggu terakhir, bagaimana kualitas makanan pada menu program MBG yang (nama) terima? (1. tidak baik, 2. kurang baik, 3. baik, 4. sangat baik)", "In the last week, how was the quality of the food in the MBG menu that (name) received? (not good, not very good, good, very good)", "T6, T7"],
  ["1111", "Dalam seminggu terakhir, berapa kali (nama) sarapan/makan pagi?", "In the last week, how many times did (name) eat breakfast?", ""],
@@ -423,7 +399,6 @@ var QS = [
  ["1113A", "Jika menerima program MBG anak sekolah: program MBG yang diterima membuat (nama) lebih bersemangat untuk belajar? (tidak setuju, kurang setuju, setuju, sangat setuju)", "For school children receiving MBG: does the programme make (name) more eager to learn? (disagree, somewhat disagree, agree, strongly agree)", "T7"],
  ["1113B", "Program MBG yang diterima membuat (nama) merasa tidak lapar di saat jam pelajaran?", "Does the programme make (name) not feel hungry during lessons?", "T7"],
  ["1114–1118", "Biaya pendidikan pada tahun ajaran 2024/2025: sekolah negeri atau swasta, uang saku, biaya transpor, beasiswa, dan biaya sekolah per jenis.", "Education costs in the 2024/2025 school year: public or private school, pocket money, transport, scholarships and school costs by type.", ""],
- ["505", "Apa tingkat/kelas tertinggi yang sedang/pernah diduduki? (Blok V)", "What is the highest grade (name) is attending or has attended? (Blok V; used to set the cost per portion for primary grades 1–3 and 4–6)", "T10"],
  ["702", "Dalam seminggu terakhir, apakah (nama) makan makanan pokok, seperti nasi/bubur nasi, sagu, ubi, dll. lebih dari 13 kali atau minimal 2 kali dalam sehari?", "In the last week, did (name) eat staple food (rice, sago, cassava and so on) more than 13 times, or at least twice a day?", "T9"],
  ["704", "Dalam seminggu terakhir, apakah (nama) makan tahu/tempe/kacang-kacangan/lauk pauk nabati yang berprotein tinggi lainnya, lebih dari 3 kali?", "In the last week, did (name) eat tofu, tempe, beans or other high-protein plant food more than 3 times?", "T9"],
  ["705", "Dalam seminggu terakhir, apakah (nama) makan telur/daging sapi/ayam/ikan/lauk pauk yang berprotein hewani lainnya, lebih dari 2 kali?", "In the last week, did (name) eat egg, beef, chicken, fish or other animal protein more than 2 times?", "T9"]
@@ -431,7 +406,7 @@ var QS = [
 var QIDX = {}; QS.forEach(function (q) { QIDX[q[0]] = q; });
 
 var CSVNAME = {T1: "T1_coverage", T2: "T2_recipients", T3: "T3_start_month", T4: "T4_days", T5: "T5_foods",
-               T6: "T6_quality", T7: "T7_children_views", T8: "T8_absence", T9: "T9_meal_frequency", T10: "T10_value"};
+               T6: "T6_quality", T7: "T7_children_views", T8: "T8_absence", T9: "T9_meal_frequency"};
 var AREAS = ["Total", "Urban", "Rural"];
 
 // ---------------------------------------------------------------- state
@@ -448,7 +423,6 @@ function group(o) {
   if (o === "agreeA" || o === "agreeB") return "views2";
   if (o === "absdays") return "absdays"; if (o === "absent1") return "absent1";
   if (o === "staple" || o === "plantp" || o === "animalp") return "foodfreq";
-  if (o === "valshare") return "valshare"; if (o === "mbgvalue") return "value"; if (o === "nrec") return "nrec";
   return "received";
 }
 function outLabel(o) {
@@ -503,20 +477,18 @@ function sync() {
 function meanUnit(o) {
   if (o === "days" || o === "absdays") return S.lang === "id" ? " hari" : " days";
   if (o === "nfoods") return S.lang === "id" ? " jenis" : " foods";
-  if (o === "nrec") return S.lang === "id" ? " orang" : " people";
   return "";
 }
 function cellValue(r) {
   if (r.flag === "hidden") return {v: "—", ci: ""};
   var v, ci = "";
-  var pct = r.statistic === "percent" || r.statistic === "ratio", rp = r.outcome === "mbgvalue";
+  var pct = r.statistic === "percent";
   if (S.show === "est") {
     if (r.estimate === null) v = "—";
-    else v = pct ? num(r.estimate, r.statistic === "ratio" ? 2 : 1) + "%" : rp ? "Rp" + full(r.estimate) : r.statistic === "mean" ? num(r.estimate, 2) : compact(r.estimate);
+    else v = pct ? num(r.estimate, 1) + "%" : r.statistic === "mean" ? num(r.estimate, 2) : compact(r.estimate);
     if (r.ci_low !== null && r.ci_high !== null) {
       ci = r.statistic === "total" ? compact(r.ci_low) + "– " + compact(r.ci_high)
-         : rp ? full(r.ci_low) + "– " + full(r.ci_high)
-         : num(r.ci_low, r.statistic === "percent" ? 1 : 2) + "–" + num(r.ci_high, r.statistic === "percent" ? 1 : 2);
+         : num(r.ci_low, pct ? 1 : 2) + "–" + num(r.ci_high, pct ? 1 : 2);
     }
   } else if (S.show === "w") {
     var w = r.statistic === "mean" ? r.weighted_persons : r.weighted_yes;
@@ -559,7 +531,6 @@ function render() {
   var areaNow = byArea ? "Total" : S.area;
   wArea.classList.toggle("hidden", !areaSel);
   cmpnote.classList.toggle("hidden", !hasSplit);
-  valnote.classList.toggle("hidden", S.table !== "T10");
 
   function find(rk, ck) {
     for (var i = 0; i < rows.length; i++) {
@@ -599,20 +570,18 @@ function render() {
   var stat = r0.statistic || "percent";
   tblttl.textContent = tr(TOPIC, S.table) + " — " + tr(POP, S.pop);
   var unit = stat === "percent" ? (S.lang === "id" ? "Persen" : "Percent")
-           : stat === "ratio" ? tr(MEASURE, "valshare")
-           : r0.outcome === "mbgvalue" ? (S.lang === "id" ? "Rupiah per bulan" : "Rupiah per month")
            : stat === "mean" ? (S.lang === "id" ? "Rata-rata" : "Mean") : (S.lang === "id" ? "Jumlah orang" : "Number of people");
   var dkey = S.measure === "received" && stat === "total" ? "received_total" : S.measure;
   var desc = DESC[dkey] ? DESC[dkey][S.lang] : unit + ".";
-  var isHH = r0.unit === "households", isMean = stat === "mean";
-  var ukey = S.show === "est" ? unitKey(S.measure, stat) : S.show === "w" ? (isHH ? "whh" : "wpeople") : (isHH ? "nhh" : "npeople");
-  if (S.show === "w") desc = isMean || isHH
+  var isMean = stat === "mean";
+  var ukey = S.show === "est" ? unitKey(S.measure, stat) : S.show === "w" ? "wpeople" : "npeople";
+  if (S.show === "w") desc = isMean
     ? (S.lang === "id" ? "Jumlah dalam kelompok ini, perkiraan untuk seluruh Indonesia." : "Number in this group, an estimate for all of Indonesia.")
     : (S.lang === "id" ? "Jumlah orang dengan jawaban ini, perkiraan untuk seluruh Indonesia." : "Number of people with this answer, an estimate for all of Indonesia.");
-  if (S.show === "n") desc = isMean || isHH
+  if (S.show === "n") desc = isMean
     ? (S.lang === "id" ? "Jumlah dalam sampel survei yang menjawab pertanyaan ini." : "Number in the survey sample who answered this question.")
     : (S.lang === "id" ? "Jumlah orang dalam sampel survei dengan jawaban ini." : "Number of people in the survey sample with this answer.");
-  var qn = (r0.question || "").replace(/, 505$/, "");
+  var qn = r0.question || "";
   unitline.innerHTML = (S.lang === "id" ? "Satuan: " : "Unit: ") + esc(UNIT[ukey][S.lang]) +
     (qn ? ' <span>· ' + (S.lang === "id" ? "Pertanyaan " : "Question ") + esc(qn) + "</span>" : "");
   tblsub.textContent = desc + (areaSel ? " " + (S.lang === "id" ? "Wilayah: " : "Area: ") + areaLabel(S.area) + "." : "") + " BPS, Susenas September 2025.";
@@ -630,21 +599,19 @@ function renderDetail() {
   var r = S.sel !== null ? R[S.sel] : null;
   var byOk = r && (r.breakdown === S.by || (S.by === "__area" && r.breakdown === "Indonesia"));
   if (!r || r.table !== S.table || r.population !== S.pop || group(r.outcome) !== S.measure || !byOk) { detail.classList.add("hidden"); return; }
-  var pct = r.statistic === "percent" || r.statistic === "ratio", whole = r.statistic === "total" || r.outcome === "mbgvalue";
+  var pct = r.statistic === "percent", whole = r.statistic === "total";
   var d = pct ? 2 : 3;
-  var est = r.estimate === null ? "—" : (r.outcome === "mbgvalue" ? "Rp" + full(r.estimate)
-          : whole ? full(r.estimate) + " " + (S.lang === "id" ? "orang" : "people")
+  var est = r.estimate === null ? "—" : (whole ? full(r.estimate) + " " + (S.lang === "id" ? "orang" : "people")
           : num(r.estimate, d) + (pct ? "%" : meanUnit(r.outcome)));
   var ci = r.ci_low === null ? "—" : (whole ? full(r.ci_low) + " – " + full(r.ci_high) : num(r.ci_low, d) + " – " + num(r.ci_high, d));
-  var hh = r.unit === "households";
-  function line(k, v) { return "<dt>" + t(hh && T[k + "_h"] ? k + "_h" : k) + "</dt><dd>" + v + "</dd>"; }
+  function line(k, v) { return "<dt>" + t(k) + "</dt><dd>" + v + "</dd>"; }
   function n(v) { return v === null ? "—" : full(v); }
   var parts = r.breakdown === "Indonesia" ? [areaLabel(r.area)] : [tr(CAT, r.category), areaLabel(r.area)];
   if (r.split_category) parts.push(tr(SPLITCAT, r.split_category));
   parts.push(outLabel(r.outcome));
   var h = "<b>" + esc(parts.join(" · ")) + "</b><dl>" +
     line("d_est", est) + line("d_ci", ci) + line("d_rse", r.rse_pct === null ? "—" : num(r.rse_pct, 1) + "%") +
-    line("d_np", n(r.n_persons)) + (hh ? "" : line("d_na", n(r.n_answered)) + line("d_nh", n(r.n_households))) +
+    line("d_np", n(r.n_persons)) + line("d_na", n(r.n_answered)) + line("d_nh", n(r.n_households)) +
     (r.n_yes !== null ? line("d_ny", n(r.n_yes)) : "") + line("d_wp", n(r.weighted_persons)) +
     (r.weighted_yes !== null ? line("d_wy", n(r.weighted_yes)) : "") + "</dl>";
   if (r.flag) h += '<p style="margin:8px 0 0;color:var(--warn)">' + t("f_" + r.flag) + "</p>";
@@ -654,7 +621,6 @@ function renderSource(r) {
   var codes = [];
   (r.question || "").split(/,\s*/).forEach(function (c) {
     if (c === "1102-1106") { codes.push("1106"); return; }
-    if (c === "1102-1108") { codes.push("1106", "1108"); return; }
     if (c === "1113") { codes.push("1113A", "1113B"); return; }
     codes.push(c);
   });
@@ -690,7 +656,7 @@ function renderStatic() {
 function $(id) { return document.getElementById(id); }
 var sTable = $("sTable"), sPop = $("sPop"), sMeasure = $("sMeasure"), sBy = $("sBy"), sOut = $("sOut"),
     wMeasure = $("wMeasure"), wBy = $("wBy"), wOut = $("wOut"), wArea = $("wArea"), gShow = $("gShow"), gArea = $("gArea"),
-    tbl = $("tbl"), tblttl = $("tblttl"), tblsub = $("tblsub"), unitline = $("unitline"), cmpnote = $("cmpnote"), valnote = $("valnote"),
+    tbl = $("tbl"), tblttl = $("tblttl"), tblsub = $("tblsub"), unitline = $("unitline"), cmpnote = $("cmpnote"),
     detail = $("detail"), src = $("src"), about = $("about"), howto = $("howto"), qlist = $("qlist"), foot = $("foot");
 
 sTable.addEventListener("change", function () { S.table = sTable.value; S.sel = null; render(); });

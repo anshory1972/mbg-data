@@ -268,8 +268,7 @@ var HOWTO = {
 };
 
 var TOPIC = {
- T1: {id: "Cakupan: persentase penerima", en: "Coverage: share receiving MBG"},
- T2: {id: "Jumlah penerima", en: "Number of recipients"},
+ T1: {id: "Penerima MBG", en: "MBG recipients"},
  T3: {id: "Bulan mulai menerima", en: "Month MBG started"},
  T4: {id: "Hari menerima dalam seminggu", en: "Days of meals in the week"},
  T5: {id: "Menu makanan", en: "Foods in the meals"},
@@ -288,7 +287,8 @@ var POP = {
  "All people receiving MBG": {id: "Semua penerima MBG", en: "All people receiving MBG"}
 };
 var MEASURE = {
- received: {id: "Menerima MBG", en: "Received MBG"},
+ received: {id: "Persen dari kelompok", en: "Percent of the group"},
+ received_n: {id: "Jumlah orang", en: "Number of people"},
  month: {id: "Per bulan", en: "By month"}, mgroup: {id: "Kelompok bulan", en: "Grouped months"},
  days: {id: "Rata-rata hari", en: "Average days"}, ddist: {id: "Sebaran jumlah hari", en: "Distribution of days"},
  foods: {id: "Jenis makanan", en: "Foods"}, nfoods: {id: "Jumlah jenis makanan", en: "Number of foods"},
@@ -310,7 +310,7 @@ var UNIT = {
  npeople: {id: "jumlah responden (orang yang diwawancarai)", en: "number of respondents (people interviewed)"},
 };
 function unitKey(m, stat) {
-  if (m === "received") return stat === "total" ? "people" : "pct";
+  if (m === "received_n") return "people";
   if (m === "days") return "days16"; if (m === "absdays") return "days06"; if (m === "nfoods") return "foods9";
   return "pct";
 }
@@ -318,7 +318,7 @@ function unitKey(m, stat) {
 // one sentence above each table: what the number is
 var DESC = {
  received: {id: "Persen orang dalam kelompok ini yang menerima MBG dalam seminggu terakhir.", en: "Percent of people in this group who received MBG in the last week."},
- received_total: {id: "Perkiraan jumlah orang di Indonesia yang menerima MBG dalam seminggu terakhir.", en: "Estimated number of people in Indonesia who received MBG in the last week."},
+ received_n: {id: "Perkiraan jumlah orang di Indonesia yang menerima MBG dalam seminggu terakhir.", en: "Estimated number of people in Indonesia who received MBG in the last week."},
  month: {id: "Persen penerima menurut bulan pertama kali menerima MBG pada 2025. Jumlah satu baris = 100%.", en: "Percent of recipients by the month they first received MBG in 2025. Each row adds up to 100%."},
  mgroup: {id: "Persen penerima menurut bulan pertama kali menerima MBG pada 2025. Jumlah satu baris = 100%.", en: "Percent of recipients by the month they first received MBG in 2025. Each row adds up to 100%."},
  days: {id: "Rata-rata jumlah hari menerima MBG dalam seminggu terakhir (1 sampai 6 hari).", en: "Average number of days with MBG meals in the last week (1 to 6 days)."},
@@ -360,7 +360,8 @@ var SPLITORDER = ["Recipients", "Non-recipients", "All"];
 var MONTH_ID = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September"];
 var MONTH_EN = ["January","February","March","April","May","June","July","August","September"];
 var OUT = {
- received: {id: "Menerima MBG", en: "Received MBG"},
+ received: {id: "Menerima MBG (%)", en: "Received MBG (%)"},
+ received_n: {id: "Jumlah penerima", en: "Number of recipients"},
  mg1: {id: "Januari–Juni", en: "January–June"}, mg2: {id: "Juli", en: "July"}, mg3: {id: "Agustus", en: "August"}, mg4: {id: "September", en: "September"},
  days: {id: "Rata-rata hari", en: "Average days"},
  f_rice: {id: "Nasi", en: "Rice"}, f_meat: {id: "Daging", en: "Meat"}, f_fish: {id: "Ikan", en: "Fish"}, f_chicken: {id: "Ayam", en: "Chicken"},
@@ -377,12 +378,12 @@ var AGREE = [{id: "Tidak setuju", en: "Disagree"}, {id: "Kurang setuju", en: "So
 
 // questions: original Indonesian (q), English, and the tables that use them
 var QS = [
- ["1101", "Identifikasi perempuan pernah kawin (PPK) umur 10–54 tahun.", "Identifies ever-married women aged 10–54.", "T1, T2"],
- ["1102", "Apakah (nama) sedang hamil?", "Is (name) pregnant?", "T1, T2"],
- ["1103", "Apakah (nama) memiliki anak umur 0–23 bulan dan sedang menyusui?", "Does (name) have a child aged 0–23 months and is she breastfeeding?", "T1, T2"],
- ["1104", "Identifikasi anak sekolah: kode 1 jika masih bersekolah.", "Identifies school children: code 1 if still in school.", "T1, T2, T8"],
- ["1105", "Identifikasi balita: kode 1 jika umur di bawah 5 tahun.", "Identifies children under five.", "T1, T2"],
- ["1106", "Dalam seminggu terakhir, apakah (nama) menerima program MBG (sesuai identifikasinya)?", "In the last week, did (name) receive the MBG programme (for their target group)?", "T1, T2, T8"],
+ ["1101", "Identifikasi perempuan pernah kawin (PPK) umur 10–54 tahun.", "Identifies ever-married women aged 10–54.", "T1"],
+ ["1102", "Apakah (nama) sedang hamil?", "Is (name) pregnant?", "T1"],
+ ["1103", "Apakah (nama) memiliki anak umur 0–23 bulan dan sedang menyusui?", "Does (name) have a child aged 0–23 months and is she breastfeeding?", "T1"],
+ ["1104", "Identifikasi anak sekolah: kode 1 jika masih bersekolah.", "Identifies school children: code 1 if still in school.", "T1, T8"],
+ ["1105", "Identifikasi balita: kode 1 jika umur di bawah 5 tahun.", "Identifies children under five.", "T1"],
+ ["1106", "Dalam seminggu terakhir, apakah (nama) menerima program MBG (sesuai identifikasinya)?", "In the last week, did (name) receive the MBG programme (for their target group)?", "T1, T8"],
  ["1107", "Pada tahun 2025, sejak bulan apa (nama) menerima program MBG?", "In 2025, since which month has (name) received the MBG programme?", "T3"],
  ["1108", "Dalam seminggu terakhir, berapa hari (nama) menerima program MBG?", "In the last week, on how many days did (name) receive the MBG programme?", "T4, T8"],
  ["1109", "Dalam seminggu terakhir, apa saja menu yang (nama) terima dari program MBG? (A. nasi, B. daging, C. ikan, D. ayam, E. telur, F. tahu/tempe, G. sayur, H. susu, I. buah, J. lainnya)", "In the last week, which foods did (name) receive from the MBG programme? (rice, meat, fish, chicken, egg, tofu/tempe, vegetables, milk, fruit, other)", "T5, T7"],
@@ -412,6 +413,7 @@ function group(o) {
   if (/^q\d$/.test(o)) return "quality"; if (/^a\d$/.test(o)) return "eager"; if (/^b\d$/.test(o)) return "hungry";
   if (o === "agreeA" || o === "agreeB") return "views2";
   if (o === "absdays") return "absdays"; if (o === "absent1") return "absent1";
+  if (o === "received_n") return "received_n";
   return "received";
 }
 function outLabel(o) {
@@ -498,7 +500,7 @@ function render() {
   }
   // for counts, the weighted view repeats the estimate, so it is not offered
   S.stat = rows.length ? rows[0].statistic : "percent";
-  if (S.stat === "total" && S.show === "w") S.show = "est";
+  if ((S.stat === "total" || S.table === "T1") && S.show === "w") S.show = "est";
   var hasSplit = rows.some(function (r) { return r.split_category; });
   // with a split (recipients / non-recipients) and several rows, show one answer at a time
   var outsAll = uniq(rows.map(function (r) { return r.outcome; }));
@@ -561,7 +563,7 @@ function render() {
   tblttl.textContent = tr(TOPIC, S.table) + " — " + tr(POP, S.pop);
   var unit = stat === "percent" ? (S.lang === "id" ? "Persen" : "Percent")
            : stat === "mean" ? (S.lang === "id" ? "Rata-rata" : "Mean") : (S.lang === "id" ? "Jumlah orang" : "Number of people");
-  var dkey = S.measure === "received" && stat === "total" ? "received_total" : S.measure;
+  var dkey = S.measure;
   var desc = DESC[dkey] ? DESC[dkey][S.lang] : unit + ".";
   var isMean = stat === "mean";
   var ukey = S.show === "est" ? unitKey(S.measure, stat) : S.show === "w" ? "wpeople" : "npeople";
@@ -581,7 +583,7 @@ function renderSeg() {
   // the first button names what the table shows
   var estKey = S.stat === "mean" ? "show_mean" : S.stat === "total" ? "show_total" : "show_pct";
   var btns = [["est", estKey], ["w", "show_w"], ["n", "show_n"]];
-  if (S.stat === "total") btns.splice(1, 1);
+  if (S.stat === "total" || S.table === "T1") btns.splice(1, 1);
   gShow.innerHTML = btns.map(function (p) {
     return '<button type="button" data-show="' + p[0] + '" aria-pressed="' + (S.show === p[0]) + '">' + t(p[1]) + "</button>";
   }).join("");
@@ -627,7 +629,7 @@ function renderSource(r) {
   });
   h += '<p class="qe">' + t("s_pop") + ": " + esc(tr(POP, S.pop)) + "</p>";
   h += '<div class="links"><a href="#kuesioner">' + t("l_qsec") + "</a>" +
-       '<a href="files/' + CSVNAME[S.table] + '.csv" download>' + t("l_csv") + "</a></div>";
+       '<a href="files/' + CSVNAME[r.csv || S.table] + '.csv" download>' + t("l_csv") + "</a></div>";
   src.innerHTML = h;
 }
 function renderQuestions() {
@@ -674,7 +676,8 @@ fetch("data.json", {cache: "no-cache"})
   .then(function (r) { return r.json(); })
   .then(function (d) {
     META = d.meta || {};
-    R = d.rows.map(function (a) { var o = {}; d.cols.forEach(function (c, i) { o[c] = a[i]; }); return o; });
+    R = d.rows.map(function (a) { var o = {}; d.cols.forEach(function (c, i) { o[c] = a[i]; }); o.csv = o.table;
+      if (o.table === "T2") { o.table = "T1"; o.outcome = "received_n"; } return o; });
     renderStatic(); render();
   })
   .catch(function () { tbl.innerHTML = "<tbody><tr><td>Data could not be loaded.</td></tr></tbody>"; });

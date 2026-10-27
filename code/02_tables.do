@@ -41,10 +41,10 @@ local ALLT   "All target groups (school children and B3)"
 local ttl "Share receiving MBG in the last week"
 
 mbgtable received, table(T1) title("`ttl'") population(pop_targets) poplabel("`ALLT'") ///
-    by(all decile quintile) stat(percent) question("1102-1106")
+    by(all quintile) stat(percent) question("1102-1106")
 
 mbgtable received, table(T1) title("`ttl'") population(pop_school) poplabel("`SCHOOL'") ///
-    by(all decile quintile level sex province) stat(percent) question("1104, 1106")
+    by(all quintile level sex province) stat(percent) question("1104, 1106")
 
 mbgtable received, table(T1) title("`ttl'") population(pop_b3) poplabel("`B3'") ///
     by(all quintile) stat(percent) question("1102, 1103, 1105, 1106")
@@ -187,15 +187,15 @@ mbgtable agreeA agreeB, table(T7) title("Children's views by meal quality and me
 local ttl "School absence in the last week"
 
 mbgtable absdays, table(T8) title("`ttl'") population(pop_school) poplabel("`SCHOOL'") ///
-    by(all decile quintile level) split(mbg) stat(mean) question("1112, 1106")
+    by(all quintile level) split(mbg) stat(mean) question("1112, 1106")
 
 mbgtable absent1, table(T8) title("`ttl'") population(pop_school) poplabel("`SCHOOL'") ///
-    by(all decile quintile level) split(mbg) stat(percent) question("1112, 1106")
+    by(all quintile level) split(mbg) stat(percent) question("1112, 1106")
 
 * recipients only, by days with MBG meals
 mbgtable absdays, table(T8) title("`ttl'") population(rec_school) ///
     poplabel("School children receiving MBG") ///
-    by(mealdays quintile) stat(mean) question("1112, 1108")
+    by(all mealdays quintile) stat(mean) question("1112, 1108")
 
 
 *------------------------------------------------------------------------------
@@ -206,17 +206,17 @@ mbgtable absdays, table(T8) title("`ttl'") population(rec_school) ///
 local ttl "Eating staple food and protein often enough in the last week"
 
 mbgtable staple plantp animalp, table(T9) title("`ttl'") population(pop_school) ///
-    poplabel("`SCHOOL'") by(all decile quintile) split(mbg) stat(percent) question("702, 704, 705")
+    poplabel("`SCHOOL'") by(all quintile) split(mbg) stat(percent) question("702, 704, 705")
 
 mbgtable staple plantp animalp, table(T9) title("`ttl'") population(pop_b3) ///
-    poplabel("`B3'") by(all decile quintile) split(mbg) stat(percent) question("702, 704, 705")
+    poplabel("`B3'") by(all quintile) split(mbg) stat(percent) question("702, 704, 705")
 
 mbgtable staple plantp animalp, table(T9) title("`ttl'") population(pop_targets) ///
-    poplabel("`ALLT'") by(all decile quintile) split(mbg) stat(percent) question("702, 704, 705")
+    poplabel("`ALLT'") by(all quintile) split(mbg) stat(percent) question("702, 704, 705")
 
 mbgtable staple plantp animalp, table(T9) title("`ttl'") population(pop_asked) ///
     poplabel("Everyone asked about MBG (target groups, including university students)") ///
-    by(all decile quintile) split(mbg) stat(percent) question("702, 704, 705")
+    by(all quintile) split(mbg) stat(percent) question("702, 704, 705")
 
 
 *------------------------------------------------------------------------------
@@ -229,13 +229,13 @@ local HH "Households with MBG recipients"
 local ttl "Value of MBG meals at programme cost"
 
 mbgtable valshare EXPEND, table(T10) title("`ttl'") population(rec_hh) poplabel("`HH'") ///
-    by(all decile quintile) stat(ratio) weight(WERT) question("1102-1108, 505")
+    by(all quintile) stat(ratio) weight(WERT) question("1102-1108, 505")
 
 mbgtable mbgvalue, table(T10) title("`ttl'") population(rec_hh) poplabel("`HH'") ///
-    by(all decile quintile) stat(mean) weight(WERT) question("1102-1108, 505")
+    by(all quintile) stat(mean) weight(WERT) question("1102-1108, 505")
 
 mbgtable nrec, table(T10) title("`ttl'") population(rec_hh) poplabel("`HH'") ///
-    by(all decile quintile) stat(mean) weight(WERT) question("1102-1106")
+    by(all quintile) stat(mean) weight(WERT) question("1102-1106")
 
 postclose mbgpost
 

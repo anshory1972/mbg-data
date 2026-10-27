@@ -44,13 +44,6 @@ label define quintile 1 "Q1 (poorest 20%)" 2 "Q2" 3 "Q3" 4 "Q4" ///
 label values quintile quintile
 label variable quintile "Expenditure quintile"
 
-* deciles, the same way (used in the BPS-style tabulations)
-xtile decile = KAPITA [pweight = FWT], nquantiles(10)
-label define decile 1 "D1 (poorest 10%)" 2 "D2" 3 "D3" 4 "D4" 5 "D5" ///
-                    6 "D6" 7 "D7" 8 "D8" 9 "D9" 10 "D10 (richest 10%)"
-label values decile decile
-label variable decile "Expenditure decile"
-
 
 *------------------------------------------------------------------------------
 * 3. Breakdown variables
@@ -311,13 +304,10 @@ collapse (sum) mbgvalue (count) nrec = mbgvalue, by(URUT)
 merge 1:1 URUT using "$DATA/ssn202509_kp_blok43.dta", ///
     keepusing(KAPITA EXPEND WERT WEIND PSU STRATA M105) nogenerate
 
-* household deciles and quintiles, from all households (weighted by WEIND,
-* the number of people the household represents)
-xtile decile   = KAPITA [pweight = WEIND], nquantiles(10)
+* household quintiles, from all households (weighted by WEIND, the number of
+* people the household represents)
 xtile quintile = KAPITA [pweight = WEIND], nquantiles(5)
-label values decile decile
 label values quintile quintile
-label variable decile   "Expenditure decile"
 label variable quintile "Expenditure quintile"
 
 keep if !missing(mbgvalue)

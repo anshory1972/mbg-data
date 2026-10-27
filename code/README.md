@@ -23,7 +23,7 @@ Web page: https://anshory1972.github.io/mbg-data/ (beta)
 | `build_web.py` | Turns the CSV files into `web/data.json` and copies the downloads and the code |
 
 Data read: `ssn202509_mod_ind.dta` (persons) and `ssn202509_kp_blok43.dta`
-(household expenditure per capita, for the quintiles and deciles).
+(household expenditure per capita, for the quintiles).
 
 ## Tables
 
@@ -52,7 +52,7 @@ not show an effect of MBG. `all_tables.csv` has all tables in one file.
   because MBG does not cover them, except in the T9 group "Everyone asked about MBG".
 - **B3:** pregnant women, breastfeeding mothers of children 0-23 months, and
   children under five.
-- **Expenditure quintiles and deciles:** people are ranked by household expenditure
+- **Expenditure quintiles:** people are ranked by household expenditure
   per capita (all spending, as BPS uses for poverty), weighted by the person weight.
   The cut points are national.
 - **Agrees (T7):** answer 3 (setuju) or 4 (sangat setuju).
@@ -63,7 +63,7 @@ not show an effect of MBG. `all_tables.csv` has all tables in one file.
   breastfeeding women, primary grades 4-6, junior and senior secondary. Monthly
   value = days with meals in the last week x cost x 4.33 weeks, summed per
   household. The % of spending is a ratio of weighted totals. T10 is computed on
-  a household file with the household weight WERT; household deciles are formed
+  a household file with the household weight WERT; household quintiles are formed
   from all households, weighted by WEIND.
 - **Weights and design:** all other estimates use the person weight. Confidence
   intervals use the survey design: strata and PSU.
@@ -75,7 +75,7 @@ not show an effect of MBG. `all_tables.csv` has all tables in one file.
 | `table`, `title` | Table number and title |
 | `population` | The people the table is about |
 | `question` | Question number(s) in questionnaire VSEN25.M |
-| `breakdown`, `category` | Rows, for example: Expenditure decile, D1 (poorest 10%) |
+| `breakdown`, `category` | Rows, for example: Expenditure quintile, Q1 (poorest 20%) |
 | `area` | Total, Urban or Rural |
 | `split`, `split_category` | Columns of T8 and T9: MBG receipt (Recipients, Non-recipients, All) |
 | `outcome`, `outcome_label` | The answer shown, for example f_egg, Egg |
